@@ -1,10 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <title>Engineering projects – Arritmic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
+<header class="site-header">
+    <div class="container header-content">
+        <div class="profile">
+            <img src="assets/images/profile.jpg" alt="Profile photo" class="profile-photo" />
+        </div>
+        <div class="title-block">
+            <h1>Engineering projects</h1>
+            <p class="subtitle">
+                Experimental systems, prototypes, and demonstrations.
+            </p>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="projects.html" class="active">Engineering projects</a>
+            </nav>
+        </div>
+    </div>
+</header>
 
+<main class="container">
+    <section>
+        <h2>Project catalogue</h2>
+        <p>
+            This section presents selected engineering projects and prototypes.
+            Each entry links to a dedicated subpage with more technical details.
+        </p>
+
+        <div class="project-grid">
+            <!-- Project 1: Camera test web app -->
+            <article class="project-card">
+                <!-- Optional thumbnail. Replace with a real image if you have one -->
+                <img src="assets/images/projects/camera-test-thumb.png"
+                     alt="Camera test project thumbnail"
+                     class="project-thumb" />
+                <h3>Browser based camera test</h3>
+                <p>
+                    Minimal web application that opens the camera in desktop and mobile browsers.
+                    Demonstrates client side access to video streams using standard web APIs.
+                </p>
+                <p class="project-links">
+                    <!-- Internal project description page -->
+                    <a href="projects/web-camera-test.html">Project details</a> ·
+                    <!-- External demo in another repository (replace with your real URL) -->
+                    <a href="https://your-username.github.io/camera-test/"
+                       target="_blank" rel="noopener noreferrer">Live demo</a>
+                </p>
+            </article>
+
+            <!-- Project 2: placeholder example -->
+            <article class="project-card">
+                <h3>Example project title</h3>
+                <p>
+                    Placeholder description for another project, such as an rPPG pipeline,
+                    multimodal sensing system, or point cloud reconstruction method.
+                </p>
+                <p class="project-links">
+                    <!-- Add subpage later -->
+                    <a href="#">Details (coming soon)</a>
+                </p>
+            </article>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <p>© <span id="year"></span> Arritmic · All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>

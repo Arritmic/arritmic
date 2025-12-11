@@ -1,10 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <title>Browser based camera test – Arritmic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body>
+<header class="site-header">
+    <div class="container header-content">
+        <div class="profile">
+            <img src="../assets/img/profile.jpg" alt="Profile photo" class="profile-photo" />
+        </div>
+        <div class="title-block">
+            <h1>Browser based camera test</h1>
+            <p class="subtitle">
+                Simple web interface for testing camera access on desktop and mobile browsers.
+            </p>
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../projects.html">Engineering projects</a>
+            </nav>
+        </div>
+    </div>
+</header>
 
+<main class="container">
+    <section>
+        <h2>Overview</h2>
+        <p>
+            This project is a minimal HTML and JavaScript application that opens the camera
+            in modern desktop and mobile browsers. It demonstrates the use of
+            <code>navigator.mediaDevices.getUserMedia</code> for video capture
+            and supports basic start and stop controls.
+        </p>
+    </section>
+
+    <section>
+        <h2>Key features</h2>
+        <ul>
+            <li>Single button to start the camera stream.</li>
+            <li>Works on Windows and Linux desktop browsers and mobile browsers.</li>
+            <li>Uses only standard web APIs and can run from a static host.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Links</h2>
+        <p>
+            Internal demo on this site:
+            <a href="camera-test-demo.html">
+                Open browser camera test (internal page)
+            </a>
+        </p>
+
+        <!-- Optional: keep external links if you still host the same demo
+             in a separate repo or want to show the source. Remove if not needed. -->
+        <p>
+            Source code (external):
+            <a href="https://github.com/your-username/camera-test"
+               target="_blank" rel="noopener noreferrer">
+               GitHub repository
+            </a>
+        </p>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <p>© <span id="year"></span> Arritmic · All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>

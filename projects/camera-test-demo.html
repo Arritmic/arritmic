@@ -1,10 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <title>Camera test demo – Arritmic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        header {
+            margin-bottom: 1rem;
+        }
+        a {
+            color: #0056b3;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button {
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            margin-right: 0.5rem;
+        }
+        video {
+            margin-top: 1rem;
+            width: 100%;
+            max-height: 400px;
+            background: #000;
+        }
+        #error {
+            margin-top: 1rem;
+            color: red;
+            white-space: pre-line;
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <p><a href="camera-test.html">← Back to project description</a></p>
+        <h1>Camera test</h1>
+    </header>
 
+    <p>
+        Click the button to open the camera. This should work on desktop and mobile
+        browsers that support <code>getUserMedia</code>.
+    </p>
+
+    <button id="startBtn">Open camera</button>
+    <button id="stopBtn" disabled>Stop camera</button>
+
+    <video id="video" autoplay playsinline></video>
+    <div id="error"></div>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn  = document.getElementById('stopBtn');
+        const video    = document.getElementById('video');
+        const errorDiv = document.getElementById('error');
+
+        let currentStream = null;
+
+        async function startCamera() {
+            errorDiv.textContent = '';
+
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                errorDiv.textContent = 'getUserMedia is not supported in this browser.';
+                return;
+            }
+
+            // Prefer back camera on mobile; desktops will just use the default camera.
+            const constraints = {
+                video: { facingMode: 'environment' },
+                audio: false
+            };
+
+            try {
+                // Stop any existing stream first
+                stopCamera(false);
+
+                const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                currentStream = stream;
+                video.srcObject = stream;
+
+                startBtn.disabled = true;
+                stopBtn.disabled = false;
+            } catch (err) {
+                console.error(err);
+                errorDiv.textContent = 'Could not access the camera:\n' + err.name + ': ' + err.message;
+            }
+        }
+
+        function stopCamera(clearError = true) {
+            if (currentStream) {
+                currentStream.getTracks().forEach(track => track.stop());
+                currentStream = null;
+            }
+            video.srcObject = null;
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+            if (clearError) errorDiv.textContent = '';
+        }
+
+        startBtn.addEventListener('click', startCamera);
+        stopBtn.addEventListener('click', () => stopCamera());
+    </script>
 </body>
 </html>
