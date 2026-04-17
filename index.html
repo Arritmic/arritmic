@@ -1,95 +1,1267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Arritmic – Personal Academic Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/style.css" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Constantino Álvarez Casado — Academic Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:    #06080d;
+  --bg2:   #0d1118;
+  --bg3:   #111820;
+  --bg4:   #161e2a;
+  --cyan:  #00d4e8;
+  --cyan2: #00fff7;
+  --mag:   #e040fb;
+  --mag2:  #ff00cc;
+  --text:  #c0cfe0;
+  --text2: #6a7a9a;
+  --text3: #3a4a68;
+  --border: rgba(0,212,232,0.18);
+  --border2: rgba(224,64,251,0.15);
+  --glow-c: 0 0 20px rgba(0,212,232,0.4);
+  --glow-m: 0 0 20px rgba(224,64,251,0.4);
+  --serif:  'EB Garamond', Georgia, serif;
+  --mono:   'JetBrains Mono', monospace;
+  --sans:   'Inter', system-ui, sans-serif;
+  --nav-h:  56px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* SCANLINES */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg,
+    transparent 0px, transparent 2px,
+    rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px);
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: var(--nav-h);
+  background: rgba(6,8,13,0.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+}
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+  text-shadow: var(--glow-c);
+}
+.nav-brand span { color: var(--mag); }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text2);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--cyan);
+  text-shadow: var(--glow-c);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  padding-top: var(--nav-h);
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  max-width: 1280px;
+  margin: 0 auto;
+  align-items: center;
+  gap: 60px;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-bottom: 40px;
+}
+
+/* BG dot grid */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background-image: radial-gradient(circle, rgba(0,212,232,0.08) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+
+.hero-text { position: relative; z-index: 1; padding: 60px 0; }
+
+.hero-sys {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+.hero-sys .blink {
+  display: inline-block;
+  width: 8px; height: 13px;
+  background: var(--cyan);
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 4.5vw, 4.4rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #e8f0f8;
+  margin-bottom: 6px;
+  position: relative;
+}
+.hero h1 .glitch {
+  position: relative;
+  display: inline-block;
+  color: var(--cyan);
+  text-shadow: var(--glow-c);
+  animation: glitch 8s infinite;
+}
+@keyframes glitch {
+  0%,94%,100% { transform: none; clip-path: none; text-shadow: 0 0 20px rgba(0,212,232,0.4); }
+  95% { transform: translate(-2px, 1px); clip-path: inset(10% 0 85% 0); text-shadow: 3px 0 var(--mag); }
+  96% { transform: translate(2px, -1px); clip-path: inset(60% 0 15% 0); text-shadow: -3px 0 var(--cyan); }
+  97% { transform: translate(-1px, 2px); clip-path: inset(30% 0 50% 0); text-shadow: 3px 0 var(--mag); }
+  98% { transform: none; clip-path: none; }
+}
+
+.hero-role {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--text2);
+  margin-bottom: 28px;
+  letter-spacing: 0.04em;
+  line-height: 1.8;
+}
+.hero-role .hl { color: var(--cyan); }
+.hero-role .hl2 { color: var(--mag); }
+
+.hero-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text2);
+  border-left: 2px solid var(--mag);
+  padding-left: 16px;
+  margin-bottom: 32px;
+  line-height: 1.65;
+  text-shadow: 0 0 30px rgba(224,64,251,0.1);
+}
+
+.hero-links { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+.hero-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text2);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 6px 12px; border-radius: 4px;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+}
+.hero-link:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  box-shadow: var(--glow-c), inset 0 0 10px rgba(0,212,232,0.05);
+  transform: translateY(-1px);
+}
+.hero-link svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+.hero-stats { display: flex; gap: 32px; }
+.stat-num {
+  font-family: var(--mono);
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--cyan);
+  text-shadow: var(--glow-c);
+  line-height: 1;
+}
+.stat-label { font-size: 0.7rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 4px; font-family: var(--mono); }
+
+/* Hero visual panel */
+.hero-visual {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+.profile-wrap {
+  position: relative;
+  width: 320px; height: 380px;
+}
+.profile-bg {
+  position: absolute; inset: 0;
+  background-image: url('uploads/arritmic_horologium_nocturnum_cover.png');
+  background-size: cover; background-position: center;
+  border-radius: 4px;
+  opacity: 0.25;
+  filter: hue-rotate(40deg);
+}
+.profile-photo {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  border-radius: 4px;
+  mix-blend-mode: luminosity;
+  filter: contrast(1.1) brightness(0.9);
+}
+.profile-frame-border {
+  position: absolute; inset: 0;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  box-shadow: var(--glow-c), inset 0 0 40px rgba(0,0,0,0.5);
+  pointer-events: none;
+}
+.profile-corner {
+  position: absolute;
+  width: 14px; height: 14px;
+  border-color: var(--cyan);
+  border-style: solid;
+}
+.profile-corner.tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.profile-corner.tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+.profile-corner.bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+.profile-corner.br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+.profile-hud {
+  position: absolute; bottom: 12px; left: 12px; right: 12px;
+  background: rgba(6,8,13,0.85);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 8px 12px;
+  backdrop-filter: blur(8px);
+}
+.hud-line {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  color: var(--text2);
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+.hud-line .v { color: var(--cyan); }
+.hud-line .v2 { color: var(--mag); }
+
+.affil-row { display: flex; flex-direction: column; gap: 8px; width: 320px; }
+.affil-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 14px;
+  display: flex; gap: 10px; align-items: center;
+}
+.affil-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); box-shadow: var(--glow-c); flex-shrink: 0; }
+.affil-dot.m { background: var(--mag); box-shadow: var(--glow-m); }
+.affil-info .affil-role { font-family: var(--mono); font-size: 0.65rem; color: var(--text3); letter-spacing: 0.04em; }
+.affil-info .affil-org { font-size: 0.83rem; color: var(--text); font-weight: 500; }
+
+/* SECTION COMMON */
+section { scroll-margin-top: calc(var(--nav-h) + 20px); }
+.section-wrap { max-width: 1280px; margin: 0 auto; padding: 80px 60px; }
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--cyan);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  text-shadow: var(--glow-c);
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 3vw, 2.8rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: #d8e4f0;
+  margin-bottom: 40px;
+}
+.section-title em { font-style: italic; color: var(--cyan); }
+.section-divider {
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, var(--cyan), transparent 60%);
+  margin-bottom: 48px;
+  opacity: 0.3;
+}
+
+/* RESEARCH */
+#research { background: var(--bg2); }
+.research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.research-card {
+  background: var(--bg3);
+  padding: 0;
+  overflow: hidden;
+  transition: transform 0.25s;
+  position: relative;
+}
+.research-card:hover { z-index: 2; transform: scale(1.01); box-shadow: var(--glow-c); }
+.research-card-img {
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+}
+.research-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(0.7) brightness(0.5);
+  transition: filter 0.3s;
+}
+.research-card:hover .research-card-img img { filter: saturate(0.85) brightness(0.65); }
+.research-card-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, var(--bg3));
+}
+.research-card-body { padding: 20px 24px 24px; }
+.rc-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  color: var(--cyan);
+  border: 1px solid var(--border);
+  padding: 2px 8px; border-radius: 2px;
+  margin-bottom: 10px;
+  letter-spacing: 0.06em;
+}
+.research-card h3 {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #d8e4f0;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.research-card p { font-size: 0.855rem; color: var(--text2); line-height: 1.65; }
+.research-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  border: 1px solid var(--border);
+  background: rgba(0,212,232,0.05);
+  padding: 5px 9px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.research-cta:hover {
+  border-color: var(--cyan);
+  box-shadow: var(--glow-c);
+  color: var(--cyan2);
+}
+.research-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
+.tag {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  background: var(--bg2);
+  color: var(--text3);
+  padding: 2px 7px; border-radius: 2px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* SEN2SEM framework */
+.framework-box {
+  margin-top: 32px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 28px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.framework-box::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--mag));
+}
+.framework-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.framework-visual {
+  margin-bottom: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--bg2);
+}
+.framework-visual img {
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.72) brightness(0.74);
+}
+.framework-visual-caption {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  color: var(--text3);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 8px 10px;
+}
+.framework-stages { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 0; }
+.fw-arrow { color: var(--cyan); font-size: 1.4rem; text-align: center; opacity: 0.6; }
+.stage { padding: 16px 20px; background: var(--bg2); border: 1px solid rgba(255,255,255,0.04); }
+.stage-num { font-family: var(--mono); font-size: 0.6rem; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; }
+.stage-name { font-family: var(--serif); font-size: 1rem; color: var(--cyan); margin: 4px 0; text-shadow: 0 0 12px rgba(0,212,232,0.3); }
+.stage-desc { font-size: 0.76rem; color: var(--text2); line-height: 1.5; }
+
+/* PUBLICATIONS */
+.pub-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; }
+.filter-btn {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  padding: 5px 12px; border-radius: 2px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: transparent;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
+}
+.filter-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+.filter-btn.active { background: var(--cyan); color: var(--bg); border-color: var(--cyan); box-shadow: var(--glow-c); }
+
+.pub-list { display: flex; flex-direction: column; }
+.pub-year-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 16px 0 6px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 12px;
+}
+.pub-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 18px;
+  padding: 14px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  align-items: start;
+  transition: background 0.2s;
+  border-radius: 2px;
+}
+.pub-item:hover { background: rgba(0,212,232,0.04); }
+.pub-badge {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  padding: 2px 6px; border-radius: 2px;
+  white-space: nowrap;
+  margin-top: 4px;
+  letter-spacing: 0.05em;
+}
+.badge-journal { background: rgba(0,212,232,0.12); color: var(--cyan); border: 1px solid rgba(0,212,232,0.2); }
+.badge-conf { background: rgba(224,64,251,0.1); color: var(--mag); border: 1px solid rgba(224,64,251,0.2); }
+.pub-title { font-family: var(--serif); font-size: 0.97rem; color: #d0dce8; font-weight: 500; line-height: 1.4; margin-bottom: 3px; }
+.pub-authors { font-size: 0.79rem; color: var(--text2); margin-bottom: 2px; }
+.pub-authors strong { color: var(--cyan); }
+.pub-venue { font-size: 0.77rem; color: var(--text3); font-style: italic; }
+.pub-link { display: inline-flex; align-items: center; gap: 3px; font-size: 0.72rem; color: var(--mag); text-decoration: none; font-style: normal; font-family: var(--mono); margin-left: 8px; }
+.pub-link:hover { text-shadow: var(--glow-m); }
+.pub-summary {
+  margin: -20px 0 24px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text2);
+  letter-spacing: 0.04em;
+}
+.pub-summary strong { color: var(--cyan); }
+
+/* GALLERY */
+#gallery { background: var(--bg2); }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.gallery-item.tall { aspect-ratio: 3/4; grid-row: span 2; }
+.gallery-item.wide { grid-column: span 2; aspect-ratio: 16/7; }
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(0.6) brightness(0.7);
+  transition: filter 0.4s, transform 0.4s;
+}
+.gallery-item:hover img { filter: saturate(0.9) brightness(0.9); transform: scale(1.04); }
+.gallery-item::after {
+  content: attr(data-caption);
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(6,8,13,0.9));
+  padding: 24px 12px 12px;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.gallery-item:hover::after { opacity: 1; }
+
+/* CV */
+.timeline { position: relative; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 120px; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, var(--cyan), var(--mag), transparent);
+  opacity: 0.3;
+}
+.tl-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0 40px;
+  padding: 18px 0;
+  position: relative;
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: 115px; top: 24px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: var(--glow-c);
+  border: 2px solid var(--bg);
+}
+.tl-year { font-family: var(--mono); font-size: 0.72rem; color: var(--text3); text-align: right; padding-right: 20px; padding-top: 4px; letter-spacing: 0.04em; }
+.tl-content { padding-left: 20px; }
+.tl-title { font-family: var(--serif); font-size: 1.02rem; font-weight: 500; color: #d0dce8; line-height: 1.3; }
+.tl-sub { font-family: var(--mono); font-size: 0.73rem; color: var(--cyan); margin-top: 3px; opacity: 0.8; }
+.tl-detail { font-size: 0.81rem; color: var(--text2); margin-top: 5px; line-height: 1.55; }
+
+/* TEACHING */
+#teaching { background: var(--bg2); }
+.teaching-lead {
+  max-width: 900px;
+  color: var(--text2);
+  margin-bottom: 32px;
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+.teaching-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.teaching-card {
+  background: var(--bg3);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 20px 22px;
+}
+.teaching-kicker {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--cyan);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.teaching-title {
+  font-family: var(--serif);
+  font-size: 1.06rem;
+  color: #d8e4f0;
+  margin-bottom: 8px;
+}
+.teaching-text {
+  font-size: 0.83rem;
+  color: var(--text2);
+  line-height: 1.65;
+}
+.teaching-cta {
+  display: inline-flex;
+  margin-top: 20px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--bg);
+  background: var(--cyan);
+  text-decoration: none;
+  padding: 10px 14px;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  box-shadow: var(--glow-c);
+}
+.teaching-cta:hover { background: var(--cyan2); }
+
+/* CONTACT */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.contact-text { font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--text2); line-height: 1.75; margin-bottom: 24px; }
+.contact-email {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 0.8rem;
+  color: var(--bg);
+  background: var(--cyan);
+  padding: 12px 20px; border-radius: 2px;
+  text-decoration: none;
+  box-shadow: var(--glow-c);
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+}
+.contact-email:hover { background: var(--cyan2); box-shadow: 0 0 30px rgba(0,212,232,0.6); }
+.contact-links-grid { display: flex; flex-direction: column; gap: 8px; }
+.cli {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 16px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 2px; text-decoration: none; color: var(--text);
+  transition: all 0.2s;
+}
+.cli:hover { border-color: var(--cyan); background: rgba(0,212,232,0.05); transform: translateX(4px); }
+.cli-icon { font-family: var(--mono); font-size: 0.75rem; color: var(--cyan); width: 24px; text-align: center; }
+.cli-label { font-family: var(--mono); font-size: 0.65rem; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; }
+.cli-value { font-size: 0.85rem; color: var(--text); font-weight: 500; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 28px 40px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text3);
+  border-top: 1px solid rgba(0,212,232,0.1);
+  letter-spacing: 0.06em;
+}
+footer a { color: var(--cyan); text-decoration: none; }
+footer a:hover { text-shadow: var(--glow-c); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; padding: 40px 24px; gap: 32px; text-align: center; }
+  .hero-visual { order: -1; align-items: center; }
+  .hero-links { justify-content: center; }
+  .hero-stats { justify-content: center; }
+  .profile-wrap { width: 260px; height: 300px; }
+  .affil-row { width: 260px; }
+  .section-wrap { padding: 60px 24px; }
+  .research-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-item.tall { aspect-ratio: 4/3; grid-row: auto; }
+  .gallery-item.wide { grid-column: auto; aspect-ratio: 4/3; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .framework-stages { grid-template-columns: 1fr; }
+  .fw-arrow { transform: rotate(90deg); }
+  .tl-item { grid-template-columns: 80px 1fr; }
+  .timeline::before { left: 80px; }
+  .tl-item::before { left: 75px; }
+  .teaching-grid { grid-template-columns: 1fr; }
+  nav { padding: 0 20px; }
+  .nav-links { gap: 12px; overflow-x: auto; max-width: 68vw; white-space: nowrap; }
+}
+</style>
+<template id="__bundler_thumbnail" data-bg-color="#06080d">
+  <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+    <!-- bg -->
+    <rect width="400" height="260" fill="#06080d"/>
+    <!-- dot grid -->
+    <pattern id="g" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="1" fill="#00d4e8" opacity="0.18"/>
+    </pattern>
+    <rect width="400" height="260" fill="url(#g)"/>
+    <!-- nav bar -->
+    <rect width="400" height="30" fill="#0d1118"/>
+    <rect width="400" height="1" y="30" fill="#00d4e8" opacity="0.3"/>
+    <text x="20" y="20" font-family="monospace" font-size="9" fill="#00d4e8" opacity="0.8">CÁC · arritmic</text>
+    <!-- profile frame -->
+    <rect x="240" y="50" width="130" height="160" rx="2" fill="#111820" stroke="#00d4e8" stroke-width="1" opacity="0.6"/>
+    <rect x="240" y="50" width="130" height="2" fill="url(#topbar)"/>
+    <defs>
+      <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#00d4e8"/>
+        <stop offset="100%" stop-color="#e040fb"/>
+      </linearGradient>
+    </defs>
+    <!-- corner marks -->
+    <polyline points="240,50 240,62" stroke="#00d4e8" stroke-width="2" fill="none"/>
+    <polyline points="240,50 252,50" stroke="#00d4e8" stroke-width="2" fill="none"/>
+    <polyline points="370,50 370,62" stroke="#00d4e8" stroke-width="2" fill="none"/>
+    <polyline points="358,50 370,50" stroke="#00d4e8" stroke-width="2" fill="none"/>
+    <!-- name glitch text -->
+    <text x="20" y="80" font-family="Georgia, serif" font-size="22" fill="#d8e4f0" font-weight="500">Constantino</text>
+    <text x="20" y="108" font-family="Georgia, serif" font-size="22" fill="#00d4e8" font-weight="500" style="text-shadow:0 0 10px #00d4e8">Álvarez</text>
+    <text x="20" y="136" font-family="Georgia, serif" font-size="22" fill="#d8e4f0" font-weight="500">Casado</text>
+    <!-- mono role -->
+    <text x="20" y="158" font-family="monospace" font-size="7.5" fill="#6a7a9a">D.Sc. (Tech) · Postdoctoral Researcher</text>
+    <text x="20" y="170" font-family="monospace" font-size="7.5" fill="#6a7a9a">CMVS · University of Oulu</text>
+    <!-- cyan line -->
+    <rect x="20" y="182" width="180" height="1" fill="#00d4e8" opacity="0.4"/>
+    <!-- tags -->
+    <rect x="20" y="192" width="60" height="14" rx="2" fill="#0d1118" stroke="#00d4e8" stroke-width="0.5" opacity="0.7"/>
+    <text x="50" y="202" font-family="monospace" font-size="6.5" fill="#00d4e8" text-anchor="middle">Computer Vision</text>
+    <rect x="86" y="192" width="46" height="14" rx="2" fill="#0d1118" stroke="#e040fb" stroke-width="0.5" opacity="0.7"/>
+    <text x="109" y="202" font-family="monospace" font-size="6.5" fill="#e040fb" text-anchor="middle">Health AI</text>
+    <rect x="138" y="192" width="42" height="14" rx="2" fill="#0d1118" stroke="#00d4e8" stroke-width="0.5" opacity="0.7"/>
+    <text x="159" y="202" font-family="monospace" font-size="6.5" fill="#00d4e8" text-anchor="middle">RF Sensing</text>
+    <!-- scanlines overlay -->
+    <rect width="400" height="260" fill="url(#scan)" opacity="0.06"/>
+    <pattern id="scan" x="0" y="0" width="1" height="4" patternUnits="userSpaceOnUse">
+      <rect width="1" height="2" fill="black"/>
+    </pattern>
+  </svg>
+</template>
 </head>
 <body>
-<header class="site-header">
-    <div class="container header-content">
-        <div class="profile">
-            <!-- Replace profile.jpg with your own image file -->
-            <img src="assets/images/profile.jpg" alt="Profile photo" class="profile-photo" />
-        </div>
-        <div class="title-block">
-            <h1>Constantino Álvarez Casado</h1>
-            <p class="subtitle">
-                Postdoctoral Researcher in Computer Vision, Signal Processing, and Artificial Intelligence
-            </p>
-            <nav class="main-nav">
-                <a href="index.html" class="active">Home</a>
-                <a href="projects.html">Engineering projects</a>
-                <!-- Add more tabs later if needed, for example:
-                <a href="#publications">Publications</a>
-                <a href="#teaching">Teaching</a>
-                -->
-            </nav>
-        </div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-brand">C<span>Á</span>C <span style="color:var(--text3);margin:0 8px">·</span> arritmic</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#publications">Publications</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#cv">CV</a>
+    <a href="#teaching">Teaching</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="about">
+  <div class="hero">
+    <div class="hero-text reveal">
+      <div class="hero-sys">
+        SYS:INIT // CMVS-OULU-FIN // 2026<span class="blink"></span>
+      </div>
+      <h1>Constantino<br><span class="glitch">Álvarez</span> Casado</h1>
+      <div class="hero-role" style="margin-top:12px">
+        <span class="hl">D.Sc. (Tech)</span> &nbsp;·&nbsp; Postdoctoral Researcher<br>
+        <span class="hl2">Computer Vision · Signal Processing · AI</span><br>
+        Center for Machine Vision and Signal Analysis, University of Oulu
+      </div>
+      <p class="hero-quote">
+        "There are things known and there are things unknown, and in between are the doors of perception." — Aldous Huxley, 1954
+      </p>
+      <div class="hero-links">
+        <a class="hero-link" href="https://scholar.google.com/citations?hl=en&user=vLYIwqUAAAAJ" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5h4.5v9H9v-6h6v6h4.5V9.5L12 0z"/></svg>Scholar
+        </a>
+        <a class="hero-link" href="https://github.com/arritmic" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>GitHub
+        </a>
+        <a class="hero-link" href="https://www.linkedin.com/in/constantino-alvarez-casado" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn
+        </a>
+        <a class="hero-link" href="https://orcid.org/0000-0002-3052-4759" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 4.022-1.247 4.022-3.722 0-2.313-1.513-3.722-4.088-3.722h-2.231z"/></svg>ORCID
+        </a>
+        <a class="hero-link" href="https://www.oulu.fi/en/researchers/constantino-alvarez-casado" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Oulu Profile
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">+45</div><div class="stat-label">Scientific Articles</div></div>
+        <div class="stat"><div class="stat-num">10</div><div class="stat-label">Journal Articles</div></div>
+        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Books &amp; Chapters</div></div>
+      </div>
     </div>
-</header>
 
-<main class="container">
-    <section id="about">
-        <h2>About</h2>
-        <p>
-            This page presents my academic work in computer vision, digital signal processing, and artificial intelligence.
-            It collects research topics, projects, and collaborations.
-        </p>
-    </section>
-
-    <section id="research">
-        <h2>Research interests</h2>
-        <p>
-            My current research covers multimodal sensing, video based physiology, remote health monitoring,
-            and intelligent systems for human centred applications.
-        </p>
-        <!-- You can expand this paragraph or turn it into several paragraphs if needed -->
-    </section>
-
-    <section id="highlights">
-        <h2>Selected highlights</h2>
-        <ul class="highlight-list">
-            <li>
-                <strong>Multimodal sensing for remote health monitoring.</strong>
-                Short description of one representative project or publication.
-            </li>
-            <li>
-                <strong>RF and WiFi based 3D perception.</strong>
-                Short description of your CSI and point cloud related work.
-            </li>
-            <li>
-                <strong>Teaching and supervision.</strong>
-                Short statement about your teaching activities.
-            </li>
-        </ul>
-    </section>
-
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>
-            You can reach me at: <a href="mailto:constantino.alvarezcasado@oulu.fi">constantino.alvarezcasado@oulu.fi</a>.
-        </p>
-        <!-- Add links to Google Scholar, GitHub, LinkedIn if you wish -->
-        <p class="links">
-            <!-- Example placeholders -->
-            <a href="https://scholar.google.com" target="_blank" rel="noopener noreferrer">Google Scholar</a> ·
-            <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">GitHub</a> ·
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        </p>
-    </section>
-</main>
-
-<footer class="site-footer">
-    <div class="container">
-        <p>© <span id="year"></span> Arritmic · All rights reserved.</p>
+    <div class="hero-visual reveal" style="transition-delay:0.15s">
+      <div class="profile-wrap">
+        <div class="profile-bg"></div>
+        <img class="profile-photo" src="uploads/tino_profile.jpg" alt="Constantino Álvarez Casado"/>
+        <div class="profile-frame-border"></div>
+        <div class="profile-corner tl"></div>
+        <div class="profile-corner tr"></div>
+        <div class="profile-corner bl"></div>
+        <div class="profile-corner br"></div>
+        <div class="profile-hud">
+          <div class="hud-line">ID &nbsp;: <span class="v">ÁLVAREZ CASADO, C.</span></div>
+          <div class="hud-line">POS: <span class="v2">POSTDOC · CMVS</span></div>
+          <div class="hud-line">LOC: <span class="v">OULU, FINLAND</span></div>
+          <div class="hud-line">STA: <span class="v">ACTIVE</span></div>
+        </div>
+      </div>
+      <div class="affil-row">
+        <div class="affil-card">
+          <div class="affil-dot"></div>
+          <div class="affil-info">
+            <div class="affil-role">Postdoctoral Researcher</div>
+            <div class="affil-org">CMVS · University of Oulu</div>
+          </div>
+        </div>
+        <div class="affil-card">
+          <div class="affil-dot m"></div>
+          <div class="affil-info">
+            <div class="affil-role">Biometrics Research Scientist</div>
+            <div class="affil-org">Candour Identity Ltd.</div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-wrap">
+    <div class="section-label reveal">Research</div>
+    <h2 class="section-title reveal">Sensing-to-<em>Semantics</em><br>for Human-Centric AI</h2>
+    <div class="section-divider reveal"></div>
+    <p class="reveal" style="max-width:720px;color:var(--text2);margin-bottom:40px;font-size:0.95rem;line-height:1.75">
+      Building Sensing-to-Semantics (SEN2SEM) architectures that transform multimodal sensory streams into interpretable, context-aware indicators — closing the <em style="color:var(--cyan)">empathy gap</em> in AI systems deployed in healthcare, education, and human–machine interaction.
+    </p>
+    <div class="research-grid">
+      <div class="research-card reveal">
+        <div class="research-card-img">
+          <img src="uploads/yle_interview.png" alt="Remote physiological sensing"/>
+        </div>
+        <div class="research-card-body">
+          <div class="rc-tag">Remote Physiology</div>
+          <h3>Remote Physiological Sensing</h3>
+          <p>Non-contact extraction of vital signs and biosignals from video. rPPG, heart rate, respiration, HRV, and depression recognition under compression artifacts, network latency, and real-world conditions.</p>
+          <div class="research-tags"><span class="tag">rPPG</span><span class="tag">Face2PPG</span><span class="tag">HRV</span><span class="tag">Depression</span><span class="tag">Health AI</span></div>
+        </div>
+      </div>
+      <div class="research-card reveal" style="transition-delay:0.1s">
+        <div class="research-card-img">
+          <img src="uploads/csi2depth.png" alt="RF and WiFi sensing"/>
+        </div>
+        <div class="research-card-body">
+          <div class="rc-tag">RF Sensing</div>
+          <h3>RF & WiFi Spatial Sensing</h3>
+          <p>Privacy-aware spatial perception using WiFi CSI, mmWave radar, and UWB. CSI2Depth generates depth-like representations from WiFi channel state for indoor human monitoring without cameras.</p>
+          <a class="research-cta" href="https://www.youtube.com/watch?v=tNGM4l1PZQQ" target="_blank" rel="noopener noreferrer">Watch CSI2Depth demo ↗</a>
+          <div class="research-tags"><span class="tag">WiFi CSI</span><span class="tag">CSI2Depth</span><span class="tag">Point Clouds</span><span class="tag">mmWave</span></div>
+        </div>
+      </div>
+      <div class="research-card reveal" style="transition-delay:0.15s">
+        <div class="research-card-img">
+          <img src="uploads/multimodal_sensing.png" alt="Multimodal sensing"/>
+        </div>
+        <div class="research-card-body">
+          <div class="rc-tag">Multimodal Fusion</div>
+          <h3>Multimodal Representation Learning</h3>
+          <p>Self-supervised frameworks for fusing heterogeneous modalities in a shared latent space. Supports missing data, asynchronous sensing, and domain shift across RGB, thermal, depth, audio, and wearables.</p>
+          <div class="research-tags"><span class="tag">Self-Supervised</span><span class="tag">Transformers</span><span class="tag">GANs</span><span class="tag">Fusion</span></div>
+        </div>
+      </div>
+      <div class="research-card reveal" style="transition-delay:0.2s">
+        <div class="research-card-img">
+          <img src="uploads/IoMT_prototype_Tino.jpg" alt="IoMT prototype"/>
+        </div>
+        <div class="research-card-body">
+          <div class="rc-tag">Trustworthy AI</div>
+          <h3>Trustworthy & Edge AI Systems</h3>
+          <p>Design principles for interpretable, energy-efficient IoT deployments for remote health monitoring — modularity, calibrated uncertainty, Bayesian inference, and neuro-symbolic reasoning traces.</p>
+          <div class="research-tags"><span class="tag">XAI</span><span class="tag">Edge AI</span><span class="tag">Bayesian</span><span class="tag">IoT</span><span class="tag">Uncertainty</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="framework-box reveal">
+      <div class="framework-label">// SEN2SEM FRAMEWORK — SENSING TO SEMANTICS PIPELINE</div>
+      <div class="framework-visual">
+        <img src="uploads/SEN2SEM_contantino.jpg" alt="SEN2SEM sensing-to-semantics framework"/>
+        <div class="framework-visual-caption">SEN2SEM framework overview and pipeline concept</div>
+      </div>
+      <div class="framework-stages">
+        <div class="stage">
+          <div class="stage-num">Stage 01</div>
+          <div class="stage-name">Multimodal Sensing</div>
+          <div class="stage-desc">RGB · Thermal · Depth · WiFi CSI · Radar · Audio · Wearables · Ambient sensors</div>
+        </div>
+        <div class="fw-arrow">→</div>
+        <div class="stage">
+          <div class="stage-num">Stage 02</div>
+          <div class="stage-name">Representation</div>
+          <div class="stage-desc">Modality-invariant latent space — cue tokens + deep tokens, self-supervised alignment, quality flags</div>
+        </div>
+        <div class="fw-arrow">→</div>
+        <div class="stage">
+          <div class="stage-num">Stage 03</div>
+          <div class="stage-name">Hybrid Reasoning</div>
+          <div class="stage-desc">Bayesian inference + neuro-symbolic logic → auditable human-state inference with reasoning trace</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-wrap">
+    <div class="section-label reveal">Publications</div>
+    <h2 class="section-title reveal">Selected Works</h2>
+    <div class="section-divider reveal"></div>
+    <p class="pub-summary reveal"><strong>As of April 15, 2026:</strong> 45 scientific articles (39 peer-reviewed: 10 journal + 29 conference) and 2 books/chapters.</p>
+    <div class="pub-filters reveal" id="pub-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="journal">Journal</button>
+      <button class="filter-btn" data-filter="conf">Conference</button>
+      <button class="filter-btn" data-filter="2026">2026</button>
+      <button class="filter-btn" data-filter="2025">2025</button>
+      <button class="filter-btn" data-filter="2024">2024</button>
+      <button class="filter-btn" data-filter="pre2024">≤2023</button>
+    </div>
+    <div class="pub-list" id="pub-list"></div>
+    <p style="margin-top:24px;font-family:var(--mono);font-size:0.72rem;color:var(--text3)">
+      // Full list on <a href="https://scholar.google.com/citations?hl=en&user=vLYIwqUAAAAJ" target="_blank" style="color:var(--cyan)">Google Scholar</a>
+    </p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-wrap">
+    <div class="section-label reveal">Gallery</div>
+    <h2 class="section-title reveal">Research in <em>the Field</em></h2>
+    <div class="section-divider reveal"></div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item tall" data-caption="University of Oulu, CMVS">
+        <img src="uploads/Constantino_UOulu_Photo_by_Manuel_Lage.jpg" alt="University of Oulu"/>
+      </div>
+      <div class="gallery-item" data-caption="Nordic Conference on Digital Health, 2024">
+        <img src="uploads/Constantino_Presentation_NordicHealthConference_2024_Photo_Le_Nguyen.jpg" alt="Conference presentation"/>
+      </div>
+      <div class="gallery-item" data-caption="Biosignal extraction — rPPG pipeline">
+        <img src="uploads/IoMT_prototype_Tino.jpg" alt="IoMT prototype"/>
+      </div>
+      <div class="gallery-item wide" data-caption="Real-time face alignment demo">
+        <img src="uploads/tino_face_realtime.gif" alt="Real-time face alignment" style="object-position: center;"/>
+      </div>
+      <div class="gallery-item" data-caption="3DPCNet — Pose canonicalization pipeline">
+        <img src="uploads/3DPCNet_Pipeline_v5(1).png" alt="3DPCNet pipeline" style="object-fit:contain;background:#0a0d14"/>
+      </div>
+      <div class="gallery-item" data-caption="Doctoral dissertation — Oulu 2023">
+        <img src="uploads/Constantino_Dissertation_Cover.jpg" alt="Dissertation cover"/>
+      </div>
+      <div class="gallery-item" data-caption="Skin segmentation & face ROI">
+        <img src="uploads/StereoSURF_Rectify_3b.png" alt="Skin segmentation and rectification" style="object-fit:contain;background:#0a0d14"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CV -->
+<section id="cv">
+  <div class="section-wrap">
+    <div class="section-label reveal">Curriculum Vitae</div>
+    <h2 class="section-title reveal">Education &amp; <em>Experience</em></h2>
+    <div class="section-divider reveal"></div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-year">2023–now</div>
+        <div class="tl-content">
+          <div class="tl-title">Postdoctoral Researcher — Computer Vision & AI</div>
+          <div class="tl-sub">CMVS · University of Oulu, Finland</div>
+          <div class="tl-detail">Research on SEN2SEM frameworks, multimodal sensing, remote health monitoring, RF-based spatial perception. Teaching and PhD student supervision.</div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-year">2023–now</div>
+        <div class="tl-content">
+          <div class="tl-title">Biometrics Research Scientist</div>
+          <div class="tl-sub">Candour Identity Ltd.</div>
+          <div class="tl-detail">Applied biometrics research bridging academic research with industrial deployment at scale.</div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-year">2023</div>
+        <div class="tl-content">
+          <div class="tl-title">Doctor of Science (D.Sc.) in Technology</div>
+          <div class="tl-sub">University of Oulu · Computer Science and Engineering</div>
+          <div class="tl-detail">Dissertation: <em>Biosignal Extraction and Analysis from Remote Video: Towards Real-world Implementation and Diagnosis Support.</em> Supervisor: Assoc. Prof. Miguel Bordallo López. Opponent: Docent Jorma Laaksonen (Aalto). Completed in 3 years with 7 peer-reviewed publications.</div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-year">2020</div>
+        <div class="tl-content">
+          <div class="tl-title">Master of Science in Technology — Artificial Intelligence</div>
+          <div class="tl-sub">University of Oulu, Finland</div>
+          <div class="tl-detail">Thesis: <em>Real-time Face Alignment: Evaluation Methods, Training Strategies and Implementation Optimization.</em> Models became official face alignment models in the <strong style="color:var(--cyan)">Dlib</strong> computer vision library.</div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-year">2017–2020</div>
+        <div class="tl-content">
+          <div class="tl-title">Computer Vision Engineer</div>
+          <div class="tl-sub">Visidon Oy & industry positions · Oulu, Finland</div>
+          <div class="tl-detail">Embedded computer vision, image signal processing, and product development while completing M.Sc.</div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-year">2015–2017</div>
+        <div class="tl-content">
+          <div class="tl-title">Assistant Researcher</div>
+          <div class="tl-sub">GRADIANT · Galician R&D Center in Advanced Telecommunications, Spain</div>
+          <div class="tl-detail">Advanced Communications and Multimodal Information research teams.</div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-year">2015</div>
+        <div class="tl-content">
+          <div class="tl-title">B.Sc. Telecommunications Engineering</div>
+          <div class="tl-sub">University of Vigo, Spain · Signal Processing & Computer Vision</div>
+          <div class="tl-detail">Erasmus exchange at University of Oulu (2014–2015). Thesis: <em>Real-time face recognition for VUZIX smart glasses</em> under supervision of Emeritus Prof. Matti Pietikäinen. Published at IEEE ICCV TASK-CV 2015.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHING -->
+<section id="teaching">
+  <div class="section-wrap">
+    <div class="section-label reveal">Teaching Portfolio</div>
+    <h2 class="section-title reveal">Teaching &amp; <em>Supervision</em></h2>
+    <div class="section-divider reveal"></div>
+    <p class="teaching-lead reveal">
+      My teaching combines constructive alignment, hands-on implementation, and reproducible evaluation practice. I focus on helping students move from theory to validated engineering decisions in AI, signal processing, and software-intensive systems.
+    </p>
+    <div class="teaching-grid">
+      <article class="teaching-card reveal">
+        <div class="teaching-kicker">Philosophy</div>
+        <h3 class="teaching-title">Clarity, evidence, and responsible engineering</h3>
+        <p class="teaching-text">I emphasize transparent reasoning, testable claims, and clear communication of limitations so students can defend technical choices, not only produce outputs.</p>
+      </article>
+      <article class="teaching-card reveal" style="transition-delay:0.05s">
+        <div class="teaching-kicker">Course Teaching</div>
+        <h3 class="teaching-title">Digital Filters, ML, and systems practice</h3>
+        <p class="teaching-text">Course teacher in Digital Filters (Spring 2024–2026, ~120 students per term), with exercise design, Moodle workflows, and support. Co-responsible teacher role in Machine Learning starts Spring 2027.</p>
+      </article>
+      <article class="teaching-card reveal" style="transition-delay:0.1s">
+        <div class="teaching-kicker">Supervision</div>
+        <h3 class="teaching-title">B.Sc., M.Sc., and doctoral mentoring</h3>
+        <p class="teaching-text">Since 2022, I have supervised or co-supervised 14+ bachelor and master theses and currently act as technical advisor or co-supervisor for two doctoral researchers.</p>
+      </article>
+      <article class="teaching-card reveal" style="transition-delay:0.15s">
+        <div class="teaching-kicker">Pedagogical Development</div>
+        <h3 class="teaching-title">University pedagogy and AI-aware teaching</h3>
+        <p class="teaching-text">I am completing the 25 ECTS University Pedagogy programme at the University of Oulu and integrate responsible AI-tool use, reproducibility, and inclusive course design into teaching practice.</p>
+      </article>
+    </div>
+    <a class="teaching-cta reveal" href="uploads/Teaching_Portfolio_Constantino_Alvarez.pdf" target="_blank" rel="noopener noreferrer">Open Teaching Portfolio (PDF) ↗</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--bg2)">
+  <div class="section-wrap">
+    <div class="section-label reveal">Contact</div>
+    <h2 class="section-title reveal">Initiate <em>Connection</em></h2>
+    <div class="section-divider reveal"></div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <p class="contact-text">Open to collaborations in multimodal sensing, health AI, and human-centric machine learning. Reach out to discuss research, joint projects, or speaking invitations.</p>
+        <a class="contact-email" href="mailto:constantino.alvarezcasado@oulu.fi">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          constantino.alvarezcasado@oulu.fi
+        </a>
+      </div>
+      <div class="contact-links-grid reveal" style="transition-delay:0.1s">
+        <a class="cli" href="https://scholar.google.com/citations?hl=en&user=vLYIwqUAAAAJ" target="_blank">
+          <div class="cli-icon">GS</div>
+          <div><div class="cli-label">Google Scholar</div><div class="cli-value">vLYIwqUAAAAJ</div></div>
+        </a>
+        <a class="cli" href="https://github.com/arritmic" target="_blank">
+          <div class="cli-icon">GH</div>
+          <div><div class="cli-label">GitHub</div><div class="cli-value">github.com/arritmic</div></div>
+        </a>
+        <a class="cli" href="https://www.linkedin.com/in/constantino-alvarez-casado" target="_blank">
+          <div class="cli-icon">LI</div>
+          <div><div class="cli-label">LinkedIn</div><div class="cli-value">constantino-alvarez-casado</div></div>
+        </a>
+        <a class="cli" href="https://orcid.org/0000-0002-3052-4759" target="_blank">
+          <div class="cli-icon">iD</div>
+          <div><div class="cli-label">ORCID</div><div class="cli-value">0000-0002-3052-4759</div></div>
+        </a>
+        <a class="cli" href="https://www.oulu.fi/en/researchers/constantino-alvarez-casado" target="_blank">
+          <div class="cli-icon">UO</div>
+          <div><div class="cli-label">University Profile</div><div class="cli-value">oulu.fi/en/researchers</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Constantino Álvarez Casado &nbsp;·&nbsp; CMVS, University of Oulu &nbsp;·&nbsp; <a href="https://github.com/arritmic">arritmic</a></p>
 </footer>
 
 <script>
-    // Simple script to keep the year updated
-    document.getElementById("year").textContent = new Date().getFullYear();
+// Publications data
+const pubs = [
+  { year:2026, type:'journal', title:'A comprehensive survey on contactless vital sign monitoring using vision-based, radio-based, and fusion approaches', authors:'Li, Z., Wu, X., <strong>Álvarez Casado, C.</strong>, et al.', venue:'Neurocomputing, 2026' },
+  { year:2026, type:'conf', title:'3DPCNet: Pose canonicalization for robust viewpoint-invariant 3D kinematic analysis from monocular RGB cameras', authors:'Ekanayake, T., <strong>Álvarez Casado, C.</strong>, Bordallo López, M.', venue:'ICASSP 2026' },
+  { year:2026, type:'conf', title:'LiDAR-based human activity recognition through Laplacian spectral analysis', authors:'Sharifipour, S., <strong>Álvarez Casado, C.</strong>, Nguyen, L., et al.', venue:'ICASSP 2026' },
+  { year:2026, type:'conf', title:'Determinants of citizen adoption of the EUDI wallet for health services in Finland', authors:'Saifullah, K.M., Rahman, M., ..., <strong>Álvarez Casado, C.</strong>', venue:'Nordic Conference on Digital Health and Wireless Solutions, 2026' },
+  { year:2025, type:'journal', title:'A Self-Supervised Multimodal Framework for 1D Physiological Data Fusion in Remote Health Monitoring', authors:'Lage Cañellas, M., <strong>Álvarez Casado, C.</strong>, Nguyen, L., Bordallo López, M.', venue:'Information Fusion, Elsevier, 2025' },
+  { year:2025, type:'journal', title:'A Cyberpunk 2077 perspective on the prediction and understanding of future technology', authors:'Bordallo López, M., <strong>Álvarez Casado, C.</strong>', venue:'Entertainment Computing, Elsevier, 2025' },
+  { year:2025, type:'conf', title:'APML: Adaptive Probabilistic Matching Loss for Robust 3D Point Cloud Reconstruction', authors:'Sharifipour, S., <strong>Álvarez Casado, C.</strong>, Sabokrou, M., Bordallo López, M.', venue:'NeurIPS 2025' },
+  { year:2025, type:'conf', title:'CSI2Depth: Spatio-Temporal Depth Images from Wi-Fi CSI Data via Transformer Networks and conditional GANs', authors:'<strong>Álvarez Casado, C.</strong>, Lage Cañellas, M., Mustaniemi, J., et al.', venue:'SCIA 2025 · Springer' },
+  { year:2025, type:'conf', title:'Beyond Black Boxes: Trustworthy and Energy-Efficient IoT Systems for Remote Health Monitoring', authors:'<strong>Álvarez Casado, C.</strong>, Safarpour, M., Nguyen, L., et al.', venue:'IEEE ICNSC 2025' },
+  { year:2025, type:'conf', title:'Exponentially Weighted Instance-Aware Repeat Factor Sampling for Long-Tailed Object Detection in UAV Surveillance', authors:'Ahmed, T., Kumar, A., <strong>Álvarez Casado, C.</strong>, et al.', venue:'IEEE/RSJ IROS 2025' },
+  { year:2025, type:'conf', title:'Comparative Analysis of rPPG and Motion-Based Approaches for Heart and Respiration Rate Estimation from Videos', authors:'Nguyen, N., <strong>Álvarez Casado, C.</strong>, Nguyen, L., et al.', venue:'SCIA 2025 · Springer' },
+  { year:2025, type:'conf', title:'Fusion of handcrafted and deep-learned cardiorespiratory features for breathing pattern classification', authors:'Lage Cañellas, M., <strong>Álvarez Casado, C.</strong>, et al.', venue:'EUSIPCO 2025' },
+  { year:2024, type:'journal', title:'Evaluation of video-based rPPG in challenging environments: Artifact mitigation and network resilience', authors:'Nguyen, N., Nguyen, L., Li, H., Bordallo López, M. and <strong>Álvarez Casado, C.</strong>', venue:'Computers in Biology and Medicine, 2024' },
+  { year:2024, type:'journal', title:'Non-contact multimodal indoor human monitoring systems: A survey', authors:'Nguyen, L.N., ..., <strong>Álvarez Casado, C.</strong>, et al.', venue:'Information Fusion, 2024' },
+  { year:2023, type:'journal', title:'Depression recognition using remote photoplethysmography from facial videos', authors:'<strong>Álvarez Casado, C.</strong>, Lage Cañellas, M. and Bordallo López, M.', venue:'IEEE Transactions on Affective Computing, 2023' },
+  { year:2023, type:'journal', title:'Face2PPG: An unsupervised pipeline for blood volume pulse extraction from faces', authors:'<strong>Álvarez Casado, C.</strong> and Bordallo López, M.', venue:'IEEE Journal of Biomedical and Health Informatics, 2023' },
+  { year:2023, type:'journal', title:'Depression recognition from facial videos: Preprocessing and scheduling choices hide the architectural contributions', authors:'Lage Cañellas, M., <strong>Álvarez Casado, C.</strong>, et al.', venue:'Electronics Letters, 2023' },
+  { year:2021, type:'journal', title:'Real-time face alignment: evaluation methods, training strategies and implementation optimization', authors:'<strong>Álvarez Casado, C.</strong> and Bordallo López, M.', venue:'Journal of Real-Time Image Processing, 2021', url:'https://oulurepo.oulu.fi/handle/10024/16970' },
+  { year:2019, type:'journal', title:'Face alignment: improving the accuracy of fast models using domain-specific unlabelled data and a teacher–student scheme', authors:'<strong>Álvarez Casado, C.</strong> and Bordallo López, M.', venue:'Electronics Letters, 2019' },
+  { year:2015, type:'conf', title:'Real-time face recognition system for smart glasses', authors:'<strong>Álvarez Casado, C.</strong>, Pietikäinen, M.', venue:'IEEE ICCV TASK-CV Workshop, 2015', url:'https://ieeexplore.ieee.org/document/7177783' },
+];
+
+function renderPubs(filter) {
+  const list = document.getElementById('pub-list');
+  const filtered = pubs.filter(p => {
+    if (filter === 'all') return true;
+    if (filter === 'journal') return p.type === 'journal';
+    if (filter === 'conf') return p.type === 'conf';
+    if (filter === '2026') return p.year === 2026;
+    if (filter === '2025') return p.year === 2025;
+    if (filter === '2024') return p.year === 2024;
+    if (filter === 'pre2024') return p.year <= 2023;
+    return true;
+  });
+  const byYear = {};
+  filtered.forEach(p => { if (!byYear[p.year]) byYear[p.year] = []; byYear[p.year].push(p); });
+  const years = Object.keys(byYear).sort((a,b) => b-a);
+  list.innerHTML = years.map(yr => `
+    <div class="pub-year-group">
+      <div class="pub-year-label">// ${yr}</div>
+      ${byYear[yr].map(p => `
+        <div class="pub-item">
+          <span class="pub-badge badge-${p.type}">${p.type === 'journal' ? 'JNL' : 'CNF'}</span>
+          <div>
+            <div class="pub-title">${p.title}</div>
+            <div class="pub-authors">${p.authors}</div>
+            <div class="pub-venue">${p.venue}${p.url ? `<a class="pub-link" href="${p.url}" target="_blank">↗</a>` : ''}</div>
+          </div>
+        </div>`).join('')}
+    </div>`).join('');
+}
+renderPubs('all');
+
+document.getElementById('pub-filters').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPubs(btn.dataset.filter);
+});
+
+// Nav active + scroll
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  const sections = ['about','research','publications','gallery','cv','teaching','contact'];
+  let current = 'about';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top < 80) current = id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+// Reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+<!-- TWEAKS -->
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accentCyan": "#00d4e8",
+  "accentMag": "#e040fb",
+  "darkMode": true
+}/*EDITMODE-END*/;
+
+let tw = {...TWEAK_DEFAULTS};
+
+function applyTweaks() {
+  const r = document.documentElement;
+  r.style.setProperty('--cyan', tw.accentCyan);
+  r.style.setProperty('--mag', tw.accentMag);
+}
+
+const panel = document.createElement('div');
+panel.id = 'tweaks-panel';
+panel.style.cssText = `display:none;position:fixed;bottom:24px;right:24px;z-index:999;background:#0d1118;border:1px solid rgba(0,212,232,0.25);border-radius:4px;padding:20px;width:240px;box-shadow:0 0 30px rgba(0,212,232,0.1);font-family:'JetBrains Mono',monospace;font-size:13px;color:#6a7a9a`;
+panel.innerHTML = `
+  <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#00d4e8;margin-bottom:16px;text-shadow:0 0 10px rgba(0,212,232,0.5)">// TWEAKS</div>
+  <div style="margin-bottom:12px">
+    <div style="font-size:10px;color:#3a4a68;margin-bottom:8px;letter-spacing:0.08em">ACCENT CYAN</div>
+    <div style="display:flex;gap:6px">
+      ${[['#00d4e8','Cyan'],['#00ff88','Green'],['#4488ff','Blue'],['#ffcc00','Yellow']].map(([c,n]) =>
+        `<div onclick="setTweak('accentCyan','${c}')" title="${n}" style="width:24px;height:24px;background:${c};cursor:pointer;border-radius:2px;box-shadow:0 0 8px ${c}40"></div>`).join('')}
+    </div>
+  </div>
+  <div style="margin-bottom:12px">
+    <div style="font-size:10px;color:#3a4a68;margin-bottom:8px;letter-spacing:0.08em">ACCENT MAG</div>
+    <div style="display:flex;gap:6px">
+      ${[['#e040fb','Magenta'],['#ff4466','Red'],['#ff8800','Orange'],['#aa44ff','Purple']].map(([c,n]) =>
+        `<div onclick="setTweak('accentMag','${c}')" title="${n}" style="width:24px;height:24px;background:${c};cursor:pointer;border-radius:2px;box-shadow:0 0 8px ${c}40"></div>`).join('')}
+    </div>
+  </div>
+`;
+document.body.appendChild(panel);
+
+function setTweak(k, v) {
+  tw[k] = v;
+  applyTweaks();
+  window.parent.postMessage({ type: '__edit_mode_set_keys', edits: tw }, '*');
+}
+
+window.addEventListener('message', e => {
+  if (e.data?.type === '__activate_edit_mode') panel.style.display = 'block';
+  if (e.data?.type === '__deactivate_edit_mode') panel.style.display = 'none';
+});
+window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+applyTweaks();
 </script>
 </body>
 </html>
