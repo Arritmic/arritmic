@@ -222,7 +222,7 @@ nav {
 }
 .profile-bg {
   position: absolute; inset: 0;
-  background-image: url('assets/images/arritmic_horologium_nocturnum_cover.png');
+  background-image: url('uploads/arritmic_horologium_nocturnum_cover.png');
   background-size: cover; background-position: center;
   border-radius: 4px;
   opacity: 0.25;
@@ -362,28 +362,6 @@ section { scroll-margin-top: calc(var(--nav-h) + 20px); }
   line-height: 1.3;
 }
 .research-card p { font-size: 0.855rem; color: var(--text2); line-height: 1.65; }
-.research-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 12px;
-  font-family: var(--mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--cyan);
-  border: 1px solid var(--border);
-  background: rgba(0,212,232,0.05);
-  padding: 5px 9px;
-  border-radius: 2px;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.research-cta:hover {
-  border-color: var(--cyan);
-  box-shadow: var(--glow-c);
-  color: var(--cyan2);
-}
 .research-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
 .tag {
   font-family: var(--mono);
@@ -416,26 +394,6 @@ section { scroll-margin-top: calc(var(--nav-h) + 20px); }
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 20px;
-}
-.framework-visual {
-  margin-bottom: 20px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: var(--bg2);
-}
-.framework-visual img {
-  width: 100%;
-  max-height: 260px;
-  object-fit: cover;
-  display: block;
-  filter: saturate(0.72) brightness(0.74);
-}
-.framework-visual-caption {
-  font-family: var(--mono);
-  font-size: 0.64rem;
-  color: var(--text3);
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  padding: 8px 10px;
 }
 .framework-stages { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 0; }
 .fw-arrow { color: var(--cyan); font-size: 1.4rem; text-align: center; opacity: 0.6; }
@@ -499,14 +457,6 @@ section { scroll-margin-top: calc(var(--nav-h) + 20px); }
 .pub-venue { font-size: 0.77rem; color: var(--text3); font-style: italic; }
 .pub-link { display: inline-flex; align-items: center; gap: 3px; font-size: 0.72rem; color: var(--mag); text-decoration: none; font-style: normal; font-family: var(--mono); margin-left: 8px; }
 .pub-link:hover { text-shadow: var(--glow-m); }
-.pub-summary {
-  margin: -20px 0 24px;
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: var(--text2);
-  letter-spacing: 0.04em;
-}
-.pub-summary strong { color: var(--cyan); }
 
 /* GALLERY */
 #gallery { background: var(--bg2); }
@@ -575,59 +525,6 @@ section { scroll-margin-top: calc(var(--nav-h) + 20px); }
 .tl-sub { font-family: var(--mono); font-size: 0.73rem; color: var(--cyan); margin-top: 3px; opacity: 0.8; }
 .tl-detail { font-size: 0.81rem; color: var(--text2); margin-top: 5px; line-height: 1.55; }
 
-/* TEACHING */
-#teaching { background: var(--bg2); }
-.teaching-lead {
-  max-width: 900px;
-  color: var(--text2);
-  margin-bottom: 32px;
-  font-size: 0.94rem;
-  line-height: 1.75;
-}
-.teaching-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.teaching-card {
-  background: var(--bg3);
-  border: 1px solid rgba(255,255,255,0.06);
-  padding: 20px 22px;
-}
-.teaching-kicker {
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  color: var(--cyan);
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-.teaching-title {
-  font-family: var(--serif);
-  font-size: 1.06rem;
-  color: #d8e4f0;
-  margin-bottom: 8px;
-}
-.teaching-text {
-  font-size: 0.83rem;
-  color: var(--text2);
-  line-height: 1.65;
-}
-.teaching-cta {
-  display: inline-flex;
-  margin-top: 20px;
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: var(--bg);
-  background: var(--cyan);
-  text-decoration: none;
-  padding: 10px 14px;
-  letter-spacing: 0.06em;
-  border-radius: 2px;
-  box-shadow: var(--glow-c);
-}
-.teaching-cta:hover { background: var(--cyan2); }
-
 /* CONTACT */
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
 .contact-text { font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--text2); line-height: 1.75; margin-bottom: 24px; }
@@ -692,9 +589,8 @@ footer a:hover { text-shadow: var(--glow-c); }
   .tl-item { grid-template-columns: 80px 1fr; }
   .timeline::before { left: 80px; }
   .tl-item::before { left: 75px; }
-  .teaching-grid { grid-template-columns: 1fr; }
   nav { padding: 0 20px; }
-  .nav-links { gap: 12px; overflow-x: auto; max-width: 68vw; white-space: nowrap; }
+  .nav-links { gap: 16px; }
 }
 </style>
 <template id="__bundler_thumbnail" data-bg-color="#06080d">
@@ -757,9 +653,9 @@ footer a:hover { text-shadow: var(--glow-c); }
     <a href="#about">About</a>
     <a href="#research">Research</a>
     <a href="#publications">Publications</a>
+    <a href="teaching.html" style="color:var(--mag)">Teaching</a>
     <a href="#gallery">Gallery</a>
     <a href="#cv">CV</a>
-    <a href="#teaching">Teaching</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -798,16 +694,16 @@ footer a:hover { text-shadow: var(--glow-c); }
         </a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><div class="stat-num">+45</div><div class="stat-label">Scientific Articles</div></div>
+        <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Publications</div></div>
         <div class="stat"><div class="stat-num">10</div><div class="stat-label">Journal Articles</div></div>
-        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Books &amp; Chapters</div></div>
+        <div class="stat"><div class="stat-num">D.Sc.</div><div class="stat-label">2023 · Oulu</div></div>
       </div>
     </div>
 
     <div class="hero-visual reveal" style="transition-delay:0.15s">
       <div class="profile-wrap">
         <div class="profile-bg"></div>
-        <img class="profile-photo" src="assets/images/tino_profile.jpg" alt="Constantino Álvarez Casado"/>
+        <img class="profile-photo" src="uploads/CAC.jpg" alt="Constantino Álvarez Casado"/>
         <div class="profile-frame-border"></div>
         <div class="profile-corner tl"></div>
         <div class="profile-corner tr"></div>
@@ -852,7 +748,7 @@ footer a:hover { text-shadow: var(--glow-c); }
     <div class="research-grid">
       <div class="research-card reveal">
         <div class="research-card-img">
-          <img src="assets/images/yle_interview.png" alt="Remote physiological sensing"/>
+          <img src="uploads/methodologies_extraction.png" alt="rPPG methods"/>
         </div>
         <div class="research-card-body">
           <div class="rc-tag">Remote Physiology</div>
@@ -863,19 +759,18 @@ footer a:hover { text-shadow: var(--glow-c); }
       </div>
       <div class="research-card reveal" style="transition-delay:0.1s">
         <div class="research-card-img">
-          <img src="assets/images/csi2depth.png" alt="RF and WiFi sensing"/>
+          <img src="uploads/1Dto2D.png" alt="RF sensing"/>
         </div>
         <div class="research-card-body">
           <div class="rc-tag">RF Sensing</div>
           <h3>RF & WiFi Spatial Sensing</h3>
           <p>Privacy-aware spatial perception using WiFi CSI, mmWave radar, and UWB. CSI2Depth generates depth-like representations from WiFi channel state for indoor human monitoring without cameras.</p>
-          <a class="research-cta" href="https://www.youtube.com/watch?v=tNGM4l1PZQQ" target="_blank" rel="noopener noreferrer">Watch CSI2Depth demo ↗</a>
           <div class="research-tags"><span class="tag">WiFi CSI</span><span class="tag">CSI2Depth</span><span class="tag">Point Clouds</span><span class="tag">mmWave</span></div>
         </div>
       </div>
       <div class="research-card reveal" style="transition-delay:0.15s">
         <div class="research-card-img">
-          <img src="assets/images/multimodal_sensing.png" alt="Multimodal sensing"/>
+          <img src="uploads/heatmap_total.png" alt="face analysis heatmap"/>
         </div>
         <div class="research-card-body">
           <div class="rc-tag">Multimodal Fusion</div>
@@ -886,7 +781,7 @@ footer a:hover { text-shadow: var(--glow-c); }
       </div>
       <div class="research-card reveal" style="transition-delay:0.2s">
         <div class="research-card-img">
-          <img src="assets/images/IoMT_prototype_Tino.jpg" alt="IoMT prototype"/>
+          <img src="uploads/IoMT_prototype_Tino.jpg" alt="IoMT prototype"/>
         </div>
         <div class="research-card-body">
           <div class="rc-tag">Trustworthy AI</div>
@@ -899,10 +794,6 @@ footer a:hover { text-shadow: var(--glow-c); }
 
     <div class="framework-box reveal">
       <div class="framework-label">// SEN2SEM FRAMEWORK — SENSING TO SEMANTICS PIPELINE</div>
-      <div class="framework-visual">
-        <img src="assets/images/SEN2SEM_contantino.jpg" alt="SEN2SEM sensing-to-semantics framework"/>
-        <div class="framework-visual-caption">SEN2SEM framework overview and pipeline concept</div>
-      </div>
       <div class="framework-stages">
         <div class="stage">
           <div class="stage-num">Stage 01</div>
@@ -932,7 +823,6 @@ footer a:hover { text-shadow: var(--glow-c); }
     <div class="section-label reveal">Publications</div>
     <h2 class="section-title reveal">Selected Works</h2>
     <div class="section-divider reveal"></div>
-    <p class="pub-summary reveal"><strong>As of April 15, 2026:</strong> 45 scientific articles (39 peer-reviewed: 10 journal + 29 conference) and 2 books/chapters.</p>
     <div class="pub-filters reveal" id="pub-filters">
       <button class="filter-btn active" data-filter="all">All</button>
       <button class="filter-btn" data-filter="journal">Journal</button>
@@ -957,25 +847,25 @@ footer a:hover { text-shadow: var(--glow-c); }
     <div class="section-divider reveal"></div>
     <div class="gallery-grid reveal">
       <div class="gallery-item tall" data-caption="University of Oulu, CMVS">
-        <img src="assets/images/Constantino_UOulu_Photo_by_Manuel_Lage.jpg" alt="University of Oulu"/>
+        <img src="uploads/Constantino_UOulu_Photo_by_Manuel_Lage.jpg" alt="University of Oulu"/>
       </div>
       <div class="gallery-item" data-caption="Nordic Conference on Digital Health, 2024">
-        <img src="assets/images/Constantino_Presentation_NordicHealthConference_2024_Photo_Le_Nguyen.jpg" alt="Conference presentation"/>
+        <img src="uploads/Constantino_Presentation_NordicHealthConference_2024_Photo_Le_Nguyen.jpg" alt="Conference presentation"/>
       </div>
       <div class="gallery-item" data-caption="Biosignal extraction — rPPG pipeline">
-        <img src="assets/images/IoMT_prototype_Tino.jpg" alt="IoMT prototype"/>
+        <img src="uploads/IoMT_prototype_Tino.jpg" alt="IoMT prototype"/>
       </div>
-      <div class="gallery-item wide" data-caption="Real-time face alignment demo">
-        <img src="assets/images/tino_face_realtime.gif" alt="Real-time face alignment" style="object-position: center;"/>
+      <div class="gallery-item wide" data-caption="Face alignment stages — Dlib models">
+        <img src="uploads/unnamed_009.png" alt="Face alignment stages" style="object-position: center;"/>
       </div>
       <div class="gallery-item" data-caption="3DPCNet — Pose canonicalization pipeline">
-        <img src="assets/images/3DPCNet_Pipeline_v5(1).png" alt="3DPCNet pipeline" style="object-fit:contain;background:#0a0d14"/>
+        <img src="uploads/3DPCNet_Pipeline_v5(1).png" alt="3DPCNet pipeline" style="object-fit:contain;background:#0a0d14"/>
       </div>
       <div class="gallery-item" data-caption="Doctoral dissertation — Oulu 2023">
-        <img src="assets/images/Constantino_Dissertation_Cover.jpg" alt="Dissertation cover"/>
+        <img src="uploads/Constantino_Dissertation_Cover.jpg" alt="Dissertation cover"/>
       </div>
       <div class="gallery-item" data-caption="Skin segmentation & face ROI">
-        <img src="assets/images/StereoSURF_Rectify_3b.png" alt="Skin segmentation and rectification" style="object-fit:contain;background:#0a0d14"/>
+        <img src="uploads/CAC.jpg" alt="Face segmentation" style="filter:saturate(0) brightness(0.7) contrast(1.2)"/>
       </div>
     </div>
   </div>
@@ -1045,41 +935,6 @@ footer a:hover { text-shadow: var(--glow-c); }
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- TEACHING -->
-<section id="teaching">
-  <div class="section-wrap">
-    <div class="section-label reveal">Teaching Portfolio</div>
-    <h2 class="section-title reveal">Teaching &amp; <em>Supervision</em></h2>
-    <div class="section-divider reveal"></div>
-    <p class="teaching-lead reveal">
-      My teaching combines constructive alignment, hands-on implementation, and reproducible evaluation practice. I focus on helping students move from theory to validated engineering decisions in AI, signal processing, and software-intensive systems.
-    </p>
-    <div class="teaching-grid">
-      <article class="teaching-card reveal">
-        <div class="teaching-kicker">Philosophy</div>
-        <h3 class="teaching-title">Clarity, evidence, and responsible engineering</h3>
-        <p class="teaching-text">I emphasize transparent reasoning, testable claims, and clear communication of limitations so students can defend technical choices, not only produce outputs.</p>
-      </article>
-      <article class="teaching-card reveal" style="transition-delay:0.05s">
-        <div class="teaching-kicker">Course Teaching</div>
-        <h3 class="teaching-title">Digital Filters, ML, and systems practice</h3>
-        <p class="teaching-text">Course teacher in Digital Filters (Spring 2024–2026, ~120 students per term), with exercise design, Moodle workflows, and support. Co-responsible teacher role in Machine Learning starts Spring 2027.</p>
-      </article>
-      <article class="teaching-card reveal" style="transition-delay:0.1s">
-        <div class="teaching-kicker">Supervision</div>
-        <h3 class="teaching-title">B.Sc., M.Sc., and doctoral mentoring</h3>
-        <p class="teaching-text">Since 2022, I have supervised or co-supervised 14+ bachelor and master theses and currently act as technical advisor or co-supervisor for two doctoral researchers.</p>
-      </article>
-      <article class="teaching-card reveal" style="transition-delay:0.15s">
-        <div class="teaching-kicker">Pedagogical Development</div>
-        <h3 class="teaching-title">University pedagogy and AI-aware teaching</h3>
-        <p class="teaching-text">I am completing the 25 ECTS University Pedagogy programme at the University of Oulu and integrate responsible AI-tool use, reproducibility, and inclusive course design into teaching practice.</p>
-      </article>
-    </div>
-    <a class="teaching-cta reveal" href="uploads/Teaching_Portfolio_Constantino_Alvarez.pdf" target="_blank" rel="noopener noreferrer">Open Teaching Portfolio (PDF) ↗</a>
   </div>
 </section>
 
@@ -1194,7 +1049,7 @@ document.getElementById('pub-filters').addEventListener('click', e => {
 // Nav active + scroll
 const nav = document.getElementById('main-nav');
 window.addEventListener('scroll', () => {
-  const sections = ['about','research','publications','gallery','cv','teaching','contact'];
+  const sections = ['about','research','publications','gallery','cv','contact'];
   let current = 'about';
   sections.forEach(id => {
     const el = document.getElementById(id);
