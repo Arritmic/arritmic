@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Stop Policing AI — Teaching Practice · Constantino Álvarez Casado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:    #06080d;
+  --bg2:   #0d1118;
+  --bg3:   #111820;
+  --bg4:   #161e2a;
+  --cyan:  #00d4e8;
+  --cyan2: #00fff7;
+  --mag:   #e040fb;
+  --mag2:  #ff00cc;
+  --yellow: #ffd23f;
+  --green: #2dd4a8;
+  --red:   #ff5b6e;
+  --text:  #c0cfe0;
+  --text2: #6a7a9a;
+  --text3: #3a4a68;
+  --border: rgba(0,212,232,0.18);
+  --border2: rgba(224,64,251,0.15);
+  --glow-c: 0 0 20px rgba(0,212,232,0.4);
+  --glow-m: 0 0 20px rgba(224,64,251,0.4);
+  --glow-y: 0 0 20px rgba(255,210,63,0.35);
+  --serif:  'EB Garamond', Georgia, serif;
+  --mono:   'JetBrains Mono', monospace;
+  --sans:   'Inter', system-ui, sans-serif;
+  --nav-h:  56px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg,
+    transparent 0px, transparent 2px,
+    rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px);
+}
+
+/* NAV (matches main site) */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: var(--nav-h);
+  background: rgba(6,8,13,0.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+}
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+  text-shadow: var(--glow-c);
+}
+.nav-brand span { color: var(--mag); }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text2);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--cyan);
+  text-shadow: var(--glow-c);
+}
+.nav-links a.current { color: var(--mag); text-shadow: var(--glow-m); }
+
+/* PAGE */
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + 40px) 60px 100px;
+}
+
+/* BREADCRUMB */
+.crumb {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+.crumb a { color: var(--cyan); text-decoration: none; }
+.crumb a:hover { text-shadow: var(--glow-c); }
+
+/* HERO */
+.hero-block {
+  position: relative;
+  padding: 50px 0 70px;
+  border-bottom: 1px solid var(--border2);
+  margin-bottom: 80px;
+}
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  background: rgba(255,210,63,0.07);
+  border: 1px solid rgba(255,210,63,0.3);
+  padding: 6px 14px;
+  margin-bottom: 24px;
+}
+h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: #f0f5ff;
+  margin-bottom: 20px;
+}
+h1 .accent { color: var(--mag); text-shadow: var(--glow-m); font-style: italic; }
+h1 .accent2 { color: var(--cyan); text-shadow: var(--glow-c); font-style: italic; }
+.subtitle {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 28px;
+  max-width: 900px;
+}
+.lead {
+  font-size: 1.05rem;
+  color: var(--text);
+  max-width: 760px;
+  line-height: 1.75;
+}
+.lead strong { color: var(--cyan2); font-weight: 500; }
+
+.hero-meta {
+  display: flex; gap: 30px; flex-wrap: wrap;
+  margin-top: 40px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text2);
+  letter-spacing: 0.05em;
+}
+.hero-meta span { color: var(--cyan); }
+
+/* SECTION */
+section {
+  margin-bottom: 100px;
+}
+.sec-num {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mag);
+  margin-bottom: 12px;
+}
+.sec-title {
+  font-family: var(--serif);
+  font-size: 2.6rem;
+  font-weight: 500;
+  color: #f0f5ff;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  margin-bottom: 22px;
+}
+.sec-title em { color: var(--cyan); font-style: italic; }
+.sec-lead {
+  font-size: 1.02rem;
+  color: var(--text);
+  max-width: 820px;
+  margin-bottom: 36px;
+  line-height: 1.75;
+}
+
+/* POSTER MAP — five zones */
+.poster-map {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 18px;
+  margin-bottom: 30px;
+}
+.zone {
+  background: linear-gradient(135deg, rgba(13,17,24,0.95), rgba(17,24,32,0.85));
+  border: 1px solid var(--border);
+  padding: 28px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.25s;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+.zone:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 30px rgba(0,212,232,0.15);
+  transform: translateY(-2px);
+}
+.zone::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 30px; height: 1px;
+  background: var(--cyan);
+  box-shadow: var(--glow-c);
+}
+.zone .zone-tag {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 14px;
+}
+.zone h3 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #f0f5ff;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.zone p {
+  font-size: 0.92rem;
+  color: var(--text2);
+  line-height: 1.6;
+  flex-grow: 1;
+}
+.zone .more {
+  margin-top: 18px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mag);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.zone .more::after {
+  content: '→';
+  transition: transform 0.2s;
+}
+.zone:hover .more::after { transform: translateX(4px); }
+
+/* zone variants */
+.zone.hook {
+  grid-column: 1 / -1;
+  border-color: var(--yellow);
+  background: linear-gradient(135deg, rgba(255,210,63,0.05), rgba(13,17,24,0.95));
+}
+.zone.hook::before { background: var(--yellow); box-shadow: var(--glow-y); }
+.zone.hook .zone-tag { color: var(--yellow); }
+.zone.hook h3 {
+  font-size: 2.2rem;
+  font-family: var(--serif);
+  font-weight: 600;
+}
+.zone.problem {
+  grid-column: 1 / -1;
+  border-color: var(--mag);
+  background: linear-gradient(135deg, rgba(224,64,251,0.04), rgba(13,17,24,0.95));
+}
+.zone.problem::before { background: var(--mag); box-shadow: var(--glow-m); }
+.zone.problem .zone-tag { color: var(--mag); }
+.zone.problem h3 { font-size: 1.4rem; max-width: 900px; }
+
+.zone.failure {
+  grid-column: 1 / 3;
+  border-color: var(--red);
+}
+.zone.failure::before { background: var(--red); }
+.zone.failure .zone-tag { color: var(--red); }
+
+.zone.principles {
+  grid-column: 3 / 5;
+  border-color: var(--green);
+}
+.zone.principles::before { background: var(--green); }
+.zone.principles .zone-tag { color: var(--green); }
+
+/* ZONE pictogram */
+.zone-pict {
+  position: absolute;
+  top: 22px; right: 22px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+}
+
+/* MODAL */
+.modal-back {
+  position: fixed; inset: 0;
+  background: rgba(6,8,13,0.85);
+  backdrop-filter: blur(6px);
+  z-index: 500;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 60px 20px;
+}
+.modal-back.active { display: flex; }
+.modal {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  max-width: 880px;
+  width: 100%;
+  padding: 50px 60px 60px;
+  position: relative;
+  box-shadow: 0 0 60px rgba(0,212,232,0.15);
+  animation: modalIn 0.3s ease;
+}
+@keyframes modalIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.modal::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 60px; height: 2px;
+  background: var(--cyan);
+  box-shadow: var(--glow-c);
+}
+.modal-close {
+  position: absolute;
+  top: 20px; right: 20px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text2);
+  width: 36px; height: 36px;
+  font-family: var(--mono);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+.modal-close:hover { color: var(--mag); border-color: var(--mag); }
+.modal-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mag);
+  margin-bottom: 14px;
+}
+.modal h2 {
+  font-family: var(--serif);
+  font-size: 2.3rem;
+  font-weight: 500;
+  color: #f0f5ff;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+  line-height: 1.1;
+}
+.modal h4 {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--cyan2);
+  margin: 28px 0 10px;
+}
+.modal p {
+  font-size: 0.97rem;
+  line-height: 1.75;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.modal p strong { color: var(--cyan2); font-weight: 500; }
+.modal ul, .modal ol {
+  margin: 14px 0 18px 22px;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.modal ul li, .modal ol li { margin-bottom: 6px; }
+.modal blockquote {
+  border-left: 2px solid var(--mag);
+  padding: 8px 0 8px 20px;
+  margin: 18px 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+.callout {
+  background: rgba(0,212,232,0.05);
+  border-left: 2px solid var(--cyan);
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+.callout.warn {
+  background: rgba(255,91,110,0.05);
+  border-left-color: var(--red);
+}
+.callout strong { color: var(--cyan2); }
+.callout.warn strong { color: var(--red); }
+
+/* CHART GALLERY in C zone modal */
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+.chart-card {
+  background: #f6f8fc;
+  border: 1px solid var(--border);
+  padding: 6px;
+  cursor: zoom-in;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.chart-card:hover { border-color: var(--cyan); transform: translateY(-2px); }
+.chart-card img { display: block; width: 100%; height: auto; }
+.chart-cap {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text2);
+  letter-spacing: 0.05em;
+  padding: 8px 4px 4px;
+  text-align: center;
+}
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 800;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+.lightbox.active { display: flex; }
+.lightbox img { max-width: 100%; max-height: 100%; box-shadow: 0 0 60px rgba(0,212,232,0.2); }
+.lightbox-close {
+  position: absolute; top: 20px; right: 30px;
+  background: transparent;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  font-family: var(--mono);
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+/* PROMPT COMPARE */
+.prompt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 30px;
+}
+.prompt {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 30px;
+  position: relative;
+}
+.prompt.bad { border-color: var(--red); }
+.prompt.good { border-color: var(--green); }
+.prompt-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.prompt.bad .prompt-label { color: var(--red); }
+.prompt.good .prompt-label { color: var(--green); }
+.prompt-body {
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--text);
+  background: rgba(0,0,0,0.4);
+  padding: 18px;
+  margin: 14px 0 18px;
+  border-left: 2px solid var(--text3);
+}
+.prompt.bad .prompt-body { border-left-color: var(--red); }
+.prompt.good .prompt-body { border-left-color: var(--green); }
+.prompt-foot {
+  font-size: 0.88rem;
+  color: var(--text2);
+  line-height: 1.6;
+}
+.prompt-foot strong { color: var(--cyan2); font-weight: 500; }
+
+/* OUT-OF-SCOPE accordion */
+.scope {
+  display: grid;
+  gap: 12px;
+}
+.acc {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.acc summary {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text);
+  padding: 18px 24px;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  user-select: none;
+  transition: color 0.2s;
+}
+.acc summary::-webkit-details-marker { display: none; }
+.acc summary::after {
+  content: '+';
+  position: absolute;
+  right: 24px; top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  color: var(--cyan);
+  font-size: 1.2rem;
+  transition: transform 0.2s;
+}
+.acc[open] summary::after { content: '−'; color: var(--mag); }
+.acc summary:hover { color: var(--cyan2); }
+.acc-body {
+  padding: 0 24px 22px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text2);
+}
+.acc-body p { margin-bottom: 10px; }
+.acc-body p strong { color: var(--cyan2); }
+
+/* FAQ */
+.faq { display: grid; gap: 14px; }
+
+/* FOOT */
+.materials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.mat {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.2s;
+  display: block;
+}
+.mat:hover { border-color: var(--cyan); box-shadow: var(--glow-c); }
+.mat-tag {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mag);
+  margin-bottom: 8px;
+}
+.mat-name {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: #f0f5ff;
+  line-height: 1.3;
+}
+
+/* CLOSER */
+.closer {
+  border: 1px solid var(--border2);
+  padding: 60px;
+  background: linear-gradient(135deg, rgba(224,64,251,0.04), rgba(13,17,24,0.95));
+  text-align: center;
+}
+.closer .q {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-style: italic;
+  color: #f0f5ff;
+  line-height: 1.4;
+  max-width: 800px;
+  margin: 0 auto 14px;
+}
+.closer .qsub {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mag);
+}
+
+footer {
+  margin-top: 80px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border2);
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text3);
+  letter-spacing: 0.08em;
+}
+footer a { color: var(--cyan); text-decoration: none; }
+
+/* RESPONSIVE */
+@media (max-width: 980px) {
+  main { padding: calc(var(--nav-h) + 30px) 24px 80px; }
+  .poster-map {
+    grid-template-columns: 1fr 1fr;
+  }
+  .zone.failure, .zone.principles { grid-column: 1 / -1; }
+  .prompt-grid { grid-template-columns: 1fr; }
+  .modal { padding: 40px 26px; }
+  .chart-grid { grid-template-columns: 1fr; }
+  nav { padding: 0 20px; }
+  .nav-links { gap: 14px; overflow-x: auto; }
+  h1 { font-size: 2.6rem; }
+  .sec-title { font-size: 1.8rem; }
+  .closer { padding: 40px 24px; }
+  .closer .q { font-size: 1.3rem; }
+}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="index.html" class="nav-brand" style="text-decoration:none">C<span>Á</span>C <span style="color:var(--text3);margin:0 8px">·</span> arritmic</a>
+  <div class="nav-links">
+    <a href="index.html#about">About</a>
+    <a href="index.html#research">Research</a>
+    <a href="index.html#publications">Publications</a>
+    <a href="teaching.html" class="current">Teaching</a>
+    <a href="index.html#cv">CV</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<main>
+
+<div class="crumb"><a href="index.html">← /home</a> &nbsp;//&nbsp; teaching // stop_policing_ai</div>
+
+<!-- HERO -->
+<div class="hero-block">
+  <div class="tag">OpinTori 2026 · Teaching-practice case</div>
+  <h1>Stop <span class="accent">Policing</span> AI.<br>Start <span class="accent2">Out-Teaching</span> It.</h1>
+  <p class="subtitle">Tutor, not shortcut: responsible LLM use in Digital Filters 521337A</p>
+  <p class="lead">Students will use Large Language Models whether a course explicitly designs for them or not. The pedagogical question is not only whether AI is allowed, but <strong>what kind of thinking the assignment requires after AI has been used</strong>. This page expands the OpinTori 2026 poster — each zone is interactive; click any card to read the supporting evidence, the survey detail, or the design reasoning.</p>
+  <div class="hero-meta">
+    <div>COURSE: <span>Digital Filters 521337A</span></div>
+    <div>VENUE: <span>University of Oulu</span></div>
+    <div>FORMAT: <span>Pedagogical reflection</span></div>
+    <div>UPDATED: <span>May 2026</span></div>
+  </div>
+</div>
+
+<!-- WHY THIS MATTERS -->
+<section>
+  <div class="sec-num">// 01 · context</div>
+  <h2 class="sec-title">Why <em>Digital Filters</em> is a good test case</h2>
+  <p class="sec-lead">Digital Filters combines mathematics, programming, visual interpretation, and engineering judgment. A correct-looking Python script is not enough — students need to understand what the filter does, why the result looks the way it does, and how to check whether the output is plausible. That makes the course a useful place to think carefully about what LLMs change, and what they don't.</p>
+  <p class="sec-lead" style="color:var(--text2);font-size:0.95rem">This work is <strong style="color:var(--cyan2)">not a controlled experiment</strong> and <strong style="color:var(--cyan2)">not a general AI policy proposal</strong>. It is an evidence-informed teaching-practice intervention. The central question is: <em>if students already use LLMs while learning, how should assignments be designed so that AI-supported work still requires explanation, verification, and student judgment?</em></p>
+</section>
+
+<!-- POSTER MAP -->
+<section>
+  <div class="sec-num">// 02 · poster map</div>
+  <h2 class="sec-title">The poster, <em>augmented</em></h2>
+  <p class="sec-lead">Five zones. The poster is intentionally compact and provocative — this version slows the argument down. Click any zone to open the long-form panel: pedagogical reasoning, evidence base, survey details, caveats, and what would change in the next iteration.</p>
+
+  <div class="poster-map">
+    <button class="zone hook" data-modal="m-hook">
+      <div class="zone-pict">[Z·1]</div>
+      <div class="zone-tag">Zone 1 · Hook</div>
+      <h3>Stop Policing AI. Start Out-Teaching It.</h3>
+      <p>What "policing" leaves out, what "out-teaching" actually means, and why the framing is provocative on purpose.</p>
+      <div class="more">Open zone</div>
+    </button>
+
+    <button class="zone problem" data-modal="m-problem">
+      <div class="zone-pict">[Z·2]</div>
+      <div class="zone-tag">Zone 2 · Pedagogical problem</div>
+      <h3>Students will use LLMs whether the course designs for them or not. The question is what kind of thinking the assignment still requires.</h3>
+      <p>The reframe: not "is AI allowed?" but "what evidence of understanding does the task ask for?"</p>
+      <div class="more">Open zone</div>
+    </button>
+
+    <button class="zone" data-modal="m-evidence">
+      <div class="zone-pict">[Z·3 / A]</div>
+      <div class="zone-tag">A · What the evidence says</div>
+      <h3>Guided beats unguided.</h3>
+      <p>Three findings from a scoping review (manuscript in preparation, 195 papers): guided use, explanation-seeking, and the gap between confidence and competence.</p>
+      <div class="more">Open zone</div>
+    </button>
+
+    <button class="zone" data-modal="m-changed">
+      <div class="zone-pict">[Z·3 / B]</div>
+      <div class="zone-tag">B · What changed</div>
+      <h3>AI was made visible.</h3>
+      <p>Three concrete changes: visible AI guidance in Moodle, three repeated rules, and assignments reframed around interpretation and validation.</p>
+      <div class="more">Open zone</div>
+    </button>
+
+    <button class="zone" data-modal="m-students">
+      <div class="zone-pict">[Z·3 / C]</div>
+      <div class="zone-tag">C · What students reported</div>
+      <h3>91% planned some AI-supported study.</h3>
+      <p>Two surveys: an entry pulse (n=22) and an ongoing AI-use survey (n=17). Charts, exact counts, and what the numbers do <em>not</em> prove.</p>
+      <div class="more">Open zone · 4 charts</div>
+    </button>
+
+    <button class="zone failure" data-modal="m-failure">
+      <div class="zone-pict">[Z·4]</div>
+      <div class="zone-tag">Zone 4 · Reflective lesson</div>
+      <h3>The failure was useful.</h3>
+      <p>Why optional, voluntary surveys outside the workflow are not enough — and how the next iteration embeds reflection inside the assignment itself.</p>
+      <div class="more">Open zone</div>
+    </button>
+
+    <button class="zone principles" data-modal="m-principles">
+      <div class="zone-pict">[Z·5]</div>
+      <div class="zone-tag">Zone 5 · Transferable principles</div>
+      <h3>Three things colleagues can use tomorrow.</h3>
+      <p>Make cheating boring. Grade the process. Embed reflection. Why each one moves AI from shortcut to tutor.</p>
+      <div class="more">Open zone</div>
+    </button>
+  </div>
+</section>
+
+<!-- PROMPT COMPARE -->
+<section>
+  <div class="sec-num">// 03 · from shortcut to tutor</div>
+  <h2 class="sec-title">The same tool, two prompts, two outcomes</h2>
+  <p class="sec-lead">The difference between AI as shortcut and AI as tutor is not the model. It is the prompt, the task, and the assessment criteria. Below: a side-by-side comparison from a Butterworth-filter assignment in Digital Filters.</p>
+
+  <div class="prompt-grid">
+    <div class="prompt bad">
+      <div class="prompt-label">⚠ Shortcut · solution-seeking</div>
+      <div class="prompt-body">"Give me the Python code for a Butterworth filter."</div>
+      <div class="prompt-foot"><strong>Likely learning risk:</strong> copied code · no verification · high confidence · weak understanding. The student receives a fluent answer; the assignment is "done"; the actual learning outcome — interpreting the frequency response — is bypassed.</div>
+    </div>
+    <div class="prompt good">
+      <div class="prompt-label">✓ Tutor · explanation-seeking</div>
+      <div class="prompt-body">"Explain why a Butterworth filter has a maximally flat passband. Then give me hints for implementing it in Python and ask me what I should verify in the frequency response."</div>
+      <div class="prompt-foot"><strong>Likely learning support:</strong> concept explanation · code hints · verification · interpretation. The student must still implement, check, and decide whether the output makes sense.</div>
+    </div>
+  </div>
+</section>
+
+<!-- OUT OF SCOPE -->
+<section>
+  <div class="sec-num">// 04 · out of scope, but not ignored</div>
+  <h2 class="sec-title">What this intervention is <em>not</em> about</h2>
+  <p class="sec-lead">This page is a teaching-practice case in one course. It does not try to solve the broader questions about AI systems, commercial power, data governance, bias, environmental cost, intellectual property, or regulation. Those questions matter — they are simply not the object of this intervention. The accordions below acknowledge them and point to where they would belong in a different project.</p>
+
+  <div class="scope">
+    <details class="acc">
+      <summary>Private companies and commercial interests</summary>
+      <div class="acc-body">
+        <p>Large LLM platforms are often controlled by private companies with commercial incentives. Their pricing, data practices, model access, interface design, and integration into educational tools shape how students and universities use AI.</p>
+        <p>This project acknowledges that, but does not analyze the political economy of AI platforms. The practical question here is narrower: <strong>given that students already use current AI tools, how should course assignments be designed so that learning still requires explanation, verification, and judgment?</strong></p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>Ethics and academic integrity</summary>
+      <div class="acc-body">
+        <p>Ethical questions are not ignored. The intervention assumes that transparency, accountability, and academic integrity remain important. The argument is that <strong>rules alone are not enough</strong> — students also need tasks that make responsible use visible and educationally meaningful.</p>
+        <p>This intervention does not replace academic integrity rules. It complements them by designing assignments where students must show understanding, verification, and judgment.</p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>Bias and hallucination</summary>
+      <div class="acc-body">
+        <p>LLMs can produce biased, incomplete, or incorrect outputs — and present wrong information fluently. These risks reinforce the argument for verification, but the intervention does not evaluate model bias directly. It treats bias and hallucination as <strong>reasons to teach verification habits inside assignments</strong>.</p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>Privacy and data protection</summary>
+      <div class="acc-body">
+        <p>Students may use tools with different data practices. Universities may need approved tools, clearer guidance, and better data protection. The ongoing survey suggested interest in better data protection (11/17, 65%) and clearer responsible-use guidelines (11/17, 65%). Privacy is acknowledged here as a real concern, but the intervention stays focused on course-level learning design.</p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>EU AI Act and regulation</summary>
+      <div class="acc-body">
+        <p>The EU AI Act provides regulatory context for transparency, AI literacy, and obligations for general-purpose AI providers. AI literacy and prohibited-practice provisions applied from 2 February 2025; governance and general-purpose AI obligations from 2 August 2025; the Act is generally applicable from 2 August 2026.</p>
+        <p>This intervention <strong>does not analyze legal compliance</strong>. It uses the regulatory context only as background: transparency and responsible use are not only policy concerns; they also have pedagogical consequences.</p>
+        <p style="font-size:0.85rem;color:var(--text3)">Sources: <a style="color:var(--cyan)" href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" rel="noopener">EC AI Act overview</a> · <a style="color:var(--cyan)" href="https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act" target="_blank" rel="noopener">Navigating the AI Act</a></p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="sec-num">// 05 · faq</div>
+  <h2 class="sec-title">Likely questions</h2>
+
+  <div class="faq">
+    <details class="acc">
+      <summary>Is this encouraging students to cheat?</summary>
+      <div class="acc-body"><p>No — the aim is the opposite. If AI use stays hidden, it is harder to guide, verify, or assess. The student still needs to explain, verify, and interpret the result. Visibility plus verification is the design move; "cheating" becomes less useful when the final answer is not where the marks live.</p></div>
+    </details>
+    <details class="acc">
+      <summary>Why not ban AI?</summary>
+      <div class="acc-body"><p>Bans are difficult to enforce, especially when AI is integrated into normal study tools. More importantly, a ban does not teach students how to evaluate AI output. This intervention focuses on tasks where AI use still requires student judgment.</p></div>
+    </details>
+    <details class="acc">
+      <summary>Is the survey evidence strong enough?</summary>
+      <div class="acc-body"><p>Not for statistical conclusions or representative course-level claims. The first survey gives useful Digital Filters entry information. The ongoing AI survey gives broader exploratory learning signals, but only 6 of 17 respondents were current or former Digital Filters students. The surveys are reflective teaching-practice feedback, not research evidence.</p></div>
+    </details>
+    <details class="acc">
+      <summary>What is the most important survey finding?</summary>
+      <div class="acc-body"><p>The tension: many respondents see AI as useful for learning (15/17, 88%), <em>and</em> many recognize it can make skipping thinking easier (12/17, 71%). That tension is the design signal — it is what supports scaffolded assignments rather than rules-only policy.</p></div>
+    </details>
+    <details class="acc">
+      <summary>What would change first in the next course version?</summary>
+      <div class="acc-body"><p>A short verification block in every Python assignment: did you use AI, what did you ask, what did you check, where, what did you change, what do you understand better now? Reflection moves into the workflow.</p></div>
+    </details>
+    <details class="acc">
+      <summary>Is this only relevant to Digital Filters?</summary>
+      <div class="acc-body"><p>No. The course context is Digital Filters, but the principles transfer to many courses: design for explanation-seeking, grade the process, and embed reflection inside the workflow.</p></div>
+    </details>
+  </div>
+</section>
+
+<!-- MATERIALS -->
+<section>
+  <div class="sec-num">// 06 · materials</div>
+  <h2 class="sec-title">Materials &amp; sources</h2>
+  <div class="materials">
+    <a class="mat" href="assets/Opintori_Poster_A0_Constantino.pdf" target="_blank" rel="noopener">
+      <div class="mat-tag">PDF · A0 poster</div>
+      <div class="mat-name">Opintori 2026 · Stop Policing AI poster</div>
+    </a>
+    <a class="mat" href="assets/01_programming_pulse_ai_intention.png" target="_blank" rel="noopener">
+      <div class="mat-tag">Figure 01</div>
+      <div class="mat-name">Programming Pulse — AI intention (n=22)</div>
+    </a>
+    <a class="mat" href="assets/02_final_ai_learning_signals.png" target="_blank" rel="noopener">
+      <div class="mat-tag">Figure 02</div>
+      <div class="mat-name">Ongoing AI survey — learning signals (n=17)</div>
+    </a>
+    <a class="mat" href="assets/03_final_ai_tasks_and_concerns.png" target="_blank" rel="noopener">
+      <div class="mat-tag">Figure 03</div>
+      <div class="mat-name">Tasks AI is used for · main concerns</div>
+    </a>
+    <a class="mat" href="assets/04_final_ai_guidance_access.png" target="_blank" rel="noopener">
+      <div class="mat-tag">Figure 04</div>
+      <div class="mat-name">Guidance requested · approved-tool reasons</div>
+    </a>
+    <a class="mat" href="index.html#publications">
+      <div class="mat-tag">Reference</div>
+      <div class="mat-name">Scoping review — manuscript in preparation, 195 papers</div>
+    </a>
+  </div>
+</section>
+
+<!-- CLOSER -->
+<section>
+  <div class="closer">
+    <div class="qsub">// closing question</div>
+    <p class="q">"What part of your course can AI solve in 10 seconds, and how could you redesign it so that <em style="color:var(--mag)">verification</em> becomes the learning task?"</p>
+  </div>
+</section>
+
+<footer>
+  <p>Constantino Álvarez Casado · CMVS · University of Oulu · 2026</p>
+  <p style="margin-top:6px">OpinTori 2026 teaching-practice case · <a href="index.html">return to portfolio</a></p>
+</footer>
+
+</main>
+
+<!-- ============ MODALS ============ -->
+
+<div class="modal-back" id="m-hook">
+  <div class="modal">
+    <button class="modal-close" aria-label="Close">×</button>
+    <div class="modal-tag">Zone 1 · Hook</div>
+    <h2>Stop Policing AI. Start Out-Teaching It.</h2>
+    <p>The title is intentionally provocative. The argument behind it is not.</p>
+
+    <h4>What "Stop Policing AI" means</h4>
+    <p>It does <strong>not</strong> mean ignoring academic integrity. It means a policing-only strategy is not enough. If a course focuses mainly on bans, detection software, and misconduct cases, it can miss the more important design question: what evidence of understanding should students produce when AI tools are already part of their study reality?</p>
+
+    <h4>What "Start Out-Teaching It" means</h4>
+    <p>"Out-teaching" means raising the pedagogical level of the assignment. If an LLM can generate a standard answer, the task should ask the student to interpret it, test it, connect it to course concepts, explain assumptions, or verify it against reliable sources. AI can assist — but the student must still do the intellectual work that matters.</p>
+
+    <h4>Why "Tutor, not shortcut"?</h4>
+    <p>The same LLM can support or weaken learning depending on how it is used. It behaves like a <strong>tutor</strong> when students ask for explanations, hints, debugging support, and feedback. It becomes a <strong>shortcut</strong> when students ask for complete answers and submit them without understanding or verification.</p>
+
+    <div class="callout">
+      <strong>Reader-facing one-liner:</strong> The point is not to celebrate AI or to ban it. The point is to design learning tasks that still require students to understand, check, explain, and revise their work when AI tools are available.
+    </div>
+  </div>
+</div>
+
+<div class="modal-back" id="m-problem">
+  <div class="modal">
+    <button class="modal-close" aria-label="Close">×</button>
+    <div class="modal-tag">Zone 2 · Pedagogical problem</div>
+    <h2>The reframe</h2>
+    <blockquote>Students will use LLMs whether the course explicitly designs for them or not. The pedagogical question is not only whether AI is allowed, but what kind of thinking the assignment requires after AI has been used.</blockquote>
+
+    <p>This sentence is the conceptual hinge of the whole intervention. It moves the conversation away from a policy question (allow / ban) toward a design question (what evidence of understanding does the task ask for?).</p>
+
+    <h4>Why this is a constructive-alignment problem</h4>
+    <p>If the intended learning outcomes require understanding digital filters, interpreting spectra, and validating code, then the assignments and assessment must require those actions even when students use AI tools. In an LLM-rich environment, "the code runs" is a much weaker proxy for understanding than it used to be.</p>
+
+    <div class="callout">
+      <strong>Practical version:</strong> in a Python assignment, an LLM can often produce working code. If my assessment only checks whether the code runs, I may be assessing the tool more than the student. So: what evidence of understanding do I ask students to produce?
+    </div>
+  </div>
+</div>
+
+<div class="modal-back" id="m-evidence">
+  <div class="modal">
+    <button class="modal-close" aria-label="Close">×</button>
+    <div class="modal-tag">A · Zone 3 · Evidence</div>
+    <h2>What the evidence says</h2>
+    <p>The teaching design was informed by a scoping review manuscript in preparation on LLMs in higher education, with 195 included papers. The review is used here as an evidence base for teaching design — <em>not</em> as a published result.</p>
+
+    <h4>Guided beats unguided</h4>
+    <p>The same tool can have different learning effects depending on task design. <strong>Guided use</strong> means the student is asked to use AI in a constrained way: for explanation, hints, feedback, verification, or critique. <strong>Unguided use</strong> means the student can ask for a complete answer and may never need to check or explain it. Scaffolded use is more consistently linked to positive outcomes.</p>
+
+    <h4>Explanation beats solution-seeking</h4>
+    <p>Explanation-seeking asks the LLM to help the student understand. Solution-seeking asks the LLM to complete the task. The teaching goal is not to prevent all AI interaction — it is to make explanation-seeking more useful and solution-copying less valuable.</p>
+
+    <h4>Confidence is not competence</h4>
+    <p>LLMs often produce fluent answers. Fluency can make students feel more confident, even when the answer is incomplete or wrong. This is why the course should require students to verify claims, interpret outputs, and explain reasoning.</p>
+
+    <div class="callout warn">
+      <strong>Wording discipline:</strong> say "the review suggests…" / "the evidence base points to…" — not "we proved that LLMs improve learning." The review is a manuscript in preparation, and overclaiming is the opposite of what this poster argues for.
+    </div>
+  </div>
+</div>
+
+<div class="modal-back" id="m-changed">
+  <div class="modal">
+    <button class="modal-close" aria-label="Close">×</button>
+    <div class="modal-tag">B · Zone 3 · Intervention</div>
+    <h2>What changed in the course</h2>
+
+    <h4>1 · AI was made visible</h4>
+    <p>Moodle messages explained that AI could be used as a tutor for concepts, code debugging, and alternative explanations. If AI use stays hidden, it is harder to guide, verify, or assess. Making it visible means giving students a shared language for responsible use: <em>use AI to understand, check it against reliable sources, remain accountable for what you submit</em>.</p>
+
+    <h4>2 · Three rules, repeated</h4>
+    <ol>
+      <li><strong>Understand the why.</strong> Do not submit output you cannot explain.</li>
+      <li><strong>Fact-check important outputs.</strong> Check claims against course material, books, documentation, or other reliable sources.</li>
+      <li><strong>Show your work and be transparent.</strong> The learning evidence should include reasoning, validation, and interpretation — not only a final answer.</li>
+    </ol>
+
+    <h4>3 · Assignments were reframed</h4>
+    <p>The redesign direction is to ask for:</p>
+    <ul>
+      <li>interpretation of plots;</li>
+      <li>validation of code outputs;</li>
+      <li>explanation of parameter choices;</li>
+      <li>comparison with expected behavior;</li>
+      <li>reflection on what was checked;</li>
+      <li>documentation of revisions after checking.</li>
+    </ul>
+    <p>This makes shallow copying less useful: a final answer has little value without explanation and verification.</p>
+  </div>
+</div>
+
+<div class="modal-back" id="m-students">
+  <div class="modal" style="max-width:1040px">
+    <button class="modal-close" aria-label="Close">×</button>
+    <div class="modal-tag">C · Zone 3 · Local feedback</div>
+    <h2>What students reported</h2>
+    <p>Two surveys, with very different roles. Numbers are reported in aggregate only — no raw responses, names, or identifiers.</p>
+
+    <h4>Initial Programming Pulse · n = 22</h4>
+    <p>Course-entry pulse, Digital Filters specifically. <strong>20/22 (91%)</strong> planned some AI-supported study. Wilson 95% CI 72%–97%; exact binomial p = 0.0001 vs 50%.</p>
+    <ul>
+      <li><strong>14/22 (64%)</strong> planned to use AI as a <em>personal tutor</em>.</li>
+      <li><strong>6/22 (27%)</strong> would use it <em>if stuck</em>.</li>
+      <li><strong>2/22 (9%)</strong> preferred <em>traditional resources</em>.</li>
+    </ul>
+
+    <h4>Ongoing AI survey · n = 17 · Digital Filters subset = 6</h4>
+    <p>Broader University of Oulu respondents. Useful as exploratory learning signal — <strong>not</strong> representative course evidence.</p>
+    <ul>
+      <li><strong>16/17 (94%)</strong> reported using AI for university tasks often or very often.</li>
+      <li><strong>15/17 (88%)</strong> agreed AI is useful for learning.</li>
+      <li><strong>14/17 (82%)</strong> agreed AI helps them learn more independently.</li>
+      <li><strong>12/17 (71%)</strong> agreed AI can make it easier to skip the thinking process.</li>
+      <li><strong>10/17 (59%)</strong> said they check answers before use.</li>
+    </ul>
+
+    <h4>The four charts</h4>
+    <p style="font-size:0.9rem;color:var(--text2)">Click any chart to view full size.</p>
+    <div class="chart-grid">
+      <div>
+        <div class="chart-card" data-img="assets/01_programming_pulse_ai_intention.png">
+          <img src="assets/01_programming_pulse_ai_intention.png" alt="Programming Pulse — planned AI use"/>
+        </div>
+        <div class="chart-cap">Fig 01 · Programming Pulse · planned AI use (n=22)</div>
+      </div>
+      <div>
+        <div class="chart-card" data-img="assets/02_final_ai_learning_signals.png">
+          <img src="assets/02_final_ai_learning_signals.png" alt="Learning signals"/>
+        </div>
+        <div class="chart-cap">Fig 02 · Learning signals (n=17)</div>
+      </div>
+      <div>
+        <div class="chart-card" data-img="assets/03_final_ai_tasks_and_concerns.png">
+          <img src="assets/03_final_ai_tasks_and_concerns.png" alt="Tasks and concerns"/>
+        </div>
+        <div class="chart-cap">Fig 03 · Tasks AI is used for · main concerns</div>
+      </div>
+      <div>
+        <div class="chart-card" data-img="assets/04_final_ai_guidance_access.png">
+          <img src="assets/04_final_ai_guidance_access.png" alt="Guidance requested"/>
+        </div>
+        <div class="chart-cap">Fig 04 · Guidance requested · approved-tool reasons</div>
+      </div>
+    </div>
+
+    <h4>Interpretation</h4>
+    <p>The useful design signal is not only that students use AI often — it is that <strong>positive learning attitudes coexist with a clear over-reliance risk</strong>. That tension is exactly what supports designing assignments around verification, explanation, and reflection.</p>
+
+    <div class="callout warn">
+      <strong>Why caution still matters:</strong> these are small, self-selected samples. Useful for reflective course development, not population-level claims. Wording: "the survey suggests…" / "the local feedback indicates…" — not "students proved…" or "the course showed…".
+    </div>
+  </div>
+</div>
+
+<div class="modal-back" id="m-failure">
+  <div class="modal">
+    <button class="modal-close" aria-label="Close">×</button>
+    <div class="modal-tag">Zone 4 · Reflective lesson</div>
+    <h2>The failure was useful</h2>
+    <p>The surveys did not fail completely. They produced useful signals about AI use, learning attitudes, and over-reliance risk. What they exposed was a <strong>feedback-design problem</strong>: when reflection lives outside the assignment, it becomes easier to skip — and the teacher receives weaker course-specific evidence.</p>
+
+    <h4>What was still useful</h4>
+    <p>The tension between "AI is useful for learning" and "AI can make skipping thinking easier" is exactly the design signal that supports scaffolded tasks. That signal would not be visible without the surveys.</p>
+
+    <h4>The next iteration</h4>
+    <p>Each Python assignment gets a short verification block:</p>
+    <ol>
+      <li>Did you use AI support for this task?</li>
+      <li>What did you ask it to help with?</li>
+      <li>What claim, code output, or explanation did you verify?</li>
+      <li>Where did you check it?</li>
+      <li>What did you change after checking?</li>
+      <li>What do you understand better now?</li>
+    </ol>
+    <p>This turns responsible AI use into <strong>part of the learning process</strong>, not an optional after-the-fact reflection.</p>
+  </div>
+</div>
+
+<div class="modal-back" id="m-principles">
+  <div class="modal">
+    <button class="modal-close" aria-label="Close">×</button>
+    <div class="modal-tag">Zone 5 · Three transferable principles</div>
+    <h2>Three things colleagues can use tomorrow</h2>
+
+    <h4>1 · Make cheating boring</h4>
+    <p>If a task only asks for a final answer, AI can become a shortcut. If a task asks for explanation, verification, interpretation, and revision, copied output alone is not enough. The goal is not to make cheating impossible — it is to <strong>reduce the value of shallow copying</strong>.</p>
+
+    <h4>2 · Grade the process</h4>
+    <p>A running script is not enough evidence of understanding. Process evidence can include:</p>
+    <ul>
+      <li>why a method was chosen;</li>
+      <li>what parameters mean;</li>
+      <li>what output was expected;</li>
+      <li>what was checked;</li>
+      <li>what changed after debugging;</li>
+      <li>how a plot supports or contradicts the answer.</li>
+    </ul>
+
+    <h4>3 · Embed reflection</h4>
+    <p>Reflection should appear where students are already working. A short prompt inside a notebook or assignment submission is more likely to produce useful feedback than a separate end-of-course survey.</p>
+
+    <div class="callout">
+      <strong>Closing sentence:</strong> the goal is not to ban AI or celebrate it uncritically. The goal is to design learning tasks where AI supports thinking instead of replacing it. Responsible AI use is not mainly a detection problem — it is a design problem.
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close">CLOSE [esc]</button>
+  <img src="" alt=""/>
+</div>
+
+<script>
+// MODALS
+document.querySelectorAll('.zone[data-modal]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const m = document.getElementById(btn.dataset.modal);
+    if (m) { m.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  });
+});
+document.querySelectorAll('.modal-back').forEach(mb => {
+  mb.addEventListener('click', e => {
+    if (e.target === mb || e.target.classList.contains('modal-close')) {
+      mb.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-back.active').forEach(m => m.classList.remove('active'));
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+
+// LIGHTBOX
+const lb = document.getElementById('lightbox');
+const lbImg = lb.querySelector('img');
+document.querySelectorAll('.chart-card').forEach(c => {
+  c.addEventListener('click', e => {
+    e.stopPropagation();
+    lbImg.src = c.dataset.img;
+    lb.classList.add('active');
+  });
+});
+lb.addEventListener('click', () => lb.classList.remove('active'));
+</script>
+
+</body>
+</html>
